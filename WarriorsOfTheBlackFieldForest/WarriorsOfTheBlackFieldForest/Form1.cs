@@ -320,7 +320,7 @@ namespace WarriorsOfTheBlackFieldForest
                 telo.BringToFront();
                 hpbar.BringToFront();
                 show_hp.BringToFront();
-                show_hp.Text = hpbar.Maximum.ToString();
+                show_hp.Text = hpbar.Value.ToString();
             }
 
             public virtual void urob_utocny_pohyb()
@@ -1465,6 +1465,8 @@ namespace WarriorsOfTheBlackFieldForest
             hrdina.vytvor_zakladneho_hrdinu();
             hrdina.level = 1;
             padouch.vygeneruj_bubaka(1);
+            padouch.vygeneruj_telo();
+            hrdina.pocet_potionov = 0;
             button_NovaHra.BringToFront();
 
         }
