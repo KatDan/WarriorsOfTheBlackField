@@ -1274,6 +1274,7 @@ namespace WarriorsOfTheBlackFieldForest
             button_How_to_play.Visible = false;
             button_Credits.Visible = false;
             how_to_play.Visible = true;
+            titulky.Visible = false;
         }
 
         private void ukaz_rany_Tick(object sender, EventArgs e)
@@ -1285,6 +1286,7 @@ namespace WarriorsOfTheBlackFieldForest
         private void button_NovaHra_Click(object sender, EventArgs e)
         {
             how_to_play.Visible = false;
+            titulky.Visible = false;
             menu.Zmizni_menu();
             level.nastav_nazov(1);
             level.vygeneruj_pozadie();

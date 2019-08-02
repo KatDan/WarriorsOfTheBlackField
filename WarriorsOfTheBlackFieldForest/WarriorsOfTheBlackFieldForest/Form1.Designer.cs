@@ -73,9 +73,9 @@
             this.titulky.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.titulky.Location = new System.Drawing.Point(280, 414);
             this.titulky.Name = "titulky";
-            this.titulky.Size = new System.Drawing.Size(464, 96);
+            this.titulky.Size = new System.Drawing.Size(419, 48);
             this.titulky.TabIndex = 6;
-            this.titulky.Text = "Created by Katarína Dančejová\r\nMusic composed by Nikolas Walter";
+            this.titulky.Text = "Created by Katarína Dančejová";
             this.titulky.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.titulky.Visible = false;
             // 
