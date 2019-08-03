@@ -206,18 +206,6 @@ namespace WarriorsOfTheBlackFieldForest
                 vykonane = true;
             }
 
-            //opravit
-            public void zobraz_ujmu()
-            {
-                ujma.Text = akt_sila_utoku.ToString();
-                ujma.Visible = true;
-                //ukaz_ranu.Start();
-                ujma.BackColor = System.Drawing.Color.Red;
-                ujma.BringToFront();
-                //ukaz_ranu.Stop();
-                ujma.Visible = false;
-            }
-
             public bool zisti_ci_mozes_utocit()
             {
                 if (vzdialenost < 80) return true;
@@ -242,7 +230,7 @@ namespace WarriorsOfTheBlackFieldForest
                     utoc();
                     nepriatel.show_hp.Update();
                     //urob_utocny_pohyb();
-                    zobraz_ujmu();
+                    //zobraz_ujmu();
                     vykonane = true;
                     animacia_utoku();
                     nepriatel.show_hp.Text = nepriatel.hpbar.Value.ToString();
@@ -276,6 +264,7 @@ namespace WarriorsOfTheBlackFieldForest
                     //nastav_poziciu(telo.Location.X + 60, telo.Location.Y);
                     vykonane = true;
                 }
+                else urob_pohyb_neschopnosti();
                 //else vykonane = false;
                 
             }
@@ -292,7 +281,8 @@ namespace WarriorsOfTheBlackFieldForest
                     //nastav_poziciu(telo.Location.X - 60, telo.Location.Y);
                     vykonane = true;
                 }
-                else vykonane = false;
+                //else vykonane = false;
+                else urob_pohyb_neschopnosti();
             }
 
             //vizualna stranka postavy
@@ -304,9 +294,7 @@ namespace WarriorsOfTheBlackFieldForest
                 show_hp.Location = new Point(hpbar.Location.X - show_hp.Size.Width, hpbar.Location.Y);
 
                 hpbar.BringToFront();
-                ujma.Location = new Point(hpbar.Location.X + hpbar.Size.Width + 10, hpbar.Location.Y);
-                ujma.BringToFront();
-                ujma.Visible = false;
+
                 if (boxy_akcii != null)
                 {
                     for (int i = 0; i <= 3; i++)
@@ -331,12 +319,6 @@ namespace WarriorsOfTheBlackFieldForest
                 utok_pohyb.Start();
                 utoc();
 
-            }
-
-            public void ukaz_ujmu()
-            {
-                ujma.Visible = true;
-                ujma.BringToFront();
             }
 
             public void zmizni_akcie()
@@ -812,19 +794,34 @@ namespace WarriorsOfTheBlackFieldForest
 
         public Form1()
         {
+
+            sp = new System.Media.SoundPlayer(@"kitkatbeznikolka.wav");
+            sp.PlayLooping();
+            
+
+            hudba = new Button
+            {
+                Size = new Size(120, 40),
+                Location = new Point(30, 30),
+                Text = "Music : On",
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            Controls.Add(hudba);
+            hudba.Click += new EventHandler(hudba_Click);
+
             how_to_play = new Label
             {
                 Size = new Size(900, 300),
                 Location = new Point(50, 350),
                 Text = "HOW TO PLAY:\n" +
                 "==================\n" +
-                "You went camping to the Black Field forest with your friends and while you were on a walk, they ate all your špekačky you had. You must avenge the špekačky!\n" +
+                "You went camping to the Black Field forest with your friends and while you were on a walk, they ate all Horalky you had. Naturally, you got really angry.\n" +
                 "Your task is to defeat 5 of your 'friends'. Each turn you have 4 options:\n" +
                 "# move forwards\n" +
                 "# move backwards\n" +
                 "# drink a magical potion - A shot of borovička restores you 5HP. At start, you have 0 shots of borovička.\n" +
-                "# stab - when you are close enough to your opponent, you can stab him with a stick. Damage dealt depends on your attack stats and your opponent's defense stats.\n" +
-                "       - if you are not close enough, you just stab an air for practice.\n" +
+                "# stab - when you are close enough to your opponent, you can stab him. Damage dealt depends on your attack stats and your opponent's defense stats.\n" +
+                "       - if you are not close enough, you just stab air for practice.\n" +
                 "\n" +
                 "Good luck, warrior!\n",
                 Font = new System.Drawing.Font("Comic Sans", 10F),
@@ -959,18 +956,6 @@ namespace WarriorsOfTheBlackFieldForest
                 BackColor = Color.Transparent,
             };
             Controls.Add(show_hp_padouch);
-
-            ujma_hrdina = new Label
-            {
-
-            };
-            Controls.Add(ujma_hrdina);
-
-            ujma_padouch = new Label
-            {
-
-            };
-            Controls.Add(ujma_padouch);
 
             hrdina = new Hrdina(box_krokvzad, box_krokvpred, box_mec, box_pitie, hp_hrdina, ujma_hrdina, show_hp_hrdina,hrdina_timer_krok_vpred,hrdina_timer_krok_vzad,dopredny_utok);
             hrdina.telo = new PictureBox
@@ -1194,19 +1179,18 @@ namespace WarriorsOfTheBlackFieldForest
             konfety.SendToBack();
             konfety.Visible = false;
 
-
             rnd = new Random();
-
-
 
             InitializeComponent();
         }
+
         internal Timer hrdina_timer_krok_vpred;
         internal Timer hrdina_timer_krok_vzad;
         internal Timer padouch_timer_krok_vpred;
         internal Timer padouch_timer_krok_vzad;
         internal Timer dopredny_utok;
         internal Timer spatny_utok;
+        internal Button hudba;
 
         internal int i;
 
@@ -1220,6 +1204,7 @@ namespace WarriorsOfTheBlackFieldForest
         internal PictureBox box_pitie;
         internal Label show_hp_hrdina;
         internal Random rnd;
+        internal System.Media.SoundPlayer sp;
 
         internal Padouch padouch;
         internal ProgressBar hp_padouch;
@@ -1253,7 +1238,6 @@ namespace WarriorsOfTheBlackFieldForest
             button_Credits.Visible = false;
             titulky.Visible = true;
             titulky.BringToFront();
-
         }
 
         private void Nazov_hry_Click(object sender, EventArgs e)
@@ -1266,7 +1250,6 @@ namespace WarriorsOfTheBlackFieldForest
             button_Credits.BringToFront();
             button_Credits.Visible = true;
             Napis_nad_levelom.BringToFront();
-
         }
 
         private void button_How_to_play_Click(object sender, EventArgs e)
@@ -1275,12 +1258,6 @@ namespace WarriorsOfTheBlackFieldForest
             button_Credits.Visible = false;
             how_to_play.Visible = true;
             titulky.Visible = false;
-        }
-
-        private void ukaz_rany_Tick(object sender, EventArgs e)
-        {
-            //ujma.Visible = true;
-            //ujma.BringToFront();
         }
 
         private void button_NovaHra_Click(object sender, EventArgs e)
@@ -1309,8 +1286,6 @@ namespace WarriorsOfTheBlackFieldForest
             {
                 hrdina.odmizni_akcie();
             }
-            /*if (hrdina.vykonane) rozhyb_padoucha();
-            else hrdina.urob_pohyb_neschopnosti();*/
         }
 
         private void box_krokvzad_Click(object sender, EventArgs e)
@@ -1320,8 +1295,6 @@ namespace WarriorsOfTheBlackFieldForest
             {
                 hrdina.odmizni_akcie();
             }
-            /*if (hrdina.vykonane) rozhyb_padoucha();
-            else hrdina.urob_pohyb_neschopnosti();*/
         }
 
         private void box_mec_Click(object sender, EventArgs e)
@@ -1334,8 +1307,6 @@ namespace WarriorsOfTheBlackFieldForest
             
             if (hrdina.vyhra == true) { if (hrdina.level > 5) vyhral_si(); else { Console.WriteLine(hrdina.level); hrdina.zmizni_akcie(); levelup.ukaz_sa(); updateni_level_up(hrdina.level); } }
             else rozhyb_padoucha();
-
-            //else hrdina.urob_pohyb_neschopnosti();
         }
 
         private void box_pitie_Click(object sender, EventArgs e)
@@ -1365,7 +1336,6 @@ namespace WarriorsOfTheBlackFieldForest
                 level.nastav_nazov(hrdina.level);
                 level.zrob_novy_level();
             }
-
         }
 
         private void option_2_Click(object sender, EventArgs e)
@@ -1381,8 +1351,6 @@ namespace WarriorsOfTheBlackFieldForest
                 levelup.zmizni();
                 level.zrob_novy_level();
             }
-
-
         }
 
         private void option_3_Click(object sender, EventArgs e)
@@ -1399,8 +1367,6 @@ namespace WarriorsOfTheBlackFieldForest
                 levelup.zmizni();
                 level.zrob_novy_level();
             }
-
-
         }
 
         private void option_4_Click(object sender, EventArgs e)
@@ -1416,8 +1382,6 @@ namespace WarriorsOfTheBlackFieldForest
                 levelup.zmizni();
                 level.zrob_novy_level();
             }
-
-
         }
 
         private void rozhyb_padoucha()
@@ -1579,29 +1543,23 @@ namespace WarriorsOfTheBlackFieldForest
 
         private void spatny_utok_Tick(object sender, EventArgs e)
         {
-            /*
-            //Console.WriteLine("tik");
-            if (padouch.telo.Location.X > padouch.ciel_poz_x)
-            {
-                //Console.WriteLine("utok");
-                padouch.prebieha = true;
-                padouch.telo.Location = new Point(padouch.telo.Location.X - 1, padouch.telo.Location.Y);
-            }
-            else
-            {
-                padouch.vykonane = true;
-                padouch.prebieha = false;
-                System.Threading.Thread.Sleep(15 * padouch.utok_pohyb.Interval);
-                padouch.ciel_poz_x = padouch.telo.Location.X + 10;
-                padouch.krok_vzad_t.Start();
-                padouch.krok_vpred_t.Interval = 10;
-                padouch.krok_vzad_t.Interval = 10;
-                spatny_utok.Stop();
-            }
-            */
             hrdina.show_hp.Visible = false;
             hrdina.hpbar.Visible = false;
             hrdina.zmizni_akcie();
+        }
+
+        private void hudba_Click(object sender, EventArgs e)
+        {
+            if(hudba.Text == "Music : On")
+            {
+                sp.Stop();
+                hudba.Text = "Music : Off";
+            }
+            else
+            {
+                sp.PlayLooping();
+                hudba.Text = "Music : On";
+            }
         }
     }
 }
