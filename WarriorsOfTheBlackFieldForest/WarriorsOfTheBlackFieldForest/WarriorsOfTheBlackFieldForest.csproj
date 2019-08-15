@@ -52,6 +52,7 @@
     <Compile Include="Hra.Designer.cs">
       <DependentUpon>Hra.cs</DependentUpon>
     </Compile>
+    <Compile Include="Postava.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Hra.resx">
