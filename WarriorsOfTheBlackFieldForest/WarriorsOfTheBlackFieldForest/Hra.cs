@@ -268,8 +268,19 @@ namespace WarriorsOfTheBlackFieldForest
                 };
 
                 pozadie = pozadie_menu;
-
                 Controls.Add(pozadie_menu);
+
+
+                X = new Button
+                {
+                    Text = "X",
+                    Visible = false,
+                    Size = new Size(40,40),
+                    Location = new Point(910,350),
+                };
+                Controls.Add(X);
+                X.Click += new EventHandler(x_click);
+
             }
             menu = new Main_menu(this.Napis_nad_levelom, this.button_NovaHra, this.button_How_to_play, this.button_Credits, this.pozadie_menu);
 
@@ -413,6 +424,7 @@ namespace WarriorsOfTheBlackFieldForest
         internal Button hudba;
 
         internal int i;
+        internal Button X;
 
         //deklaracie
         internal Hrdina hrdina;
@@ -478,6 +490,8 @@ namespace WarriorsOfTheBlackFieldForest
             button_Credits.Visible = false;
             how_to_play.Visible = true;
             titulky.Visible = false;
+            X.Visible = true;
+            X.BringToFront();
         }
 
         private void button_NovaHra_Click(object sender, EventArgs e)
@@ -497,6 +511,7 @@ namespace WarriorsOfTheBlackFieldForest
             level.padouch.hpbar.Value = level.padouch.hpbar.Maximum;
             button_NovaHra.Visible = false;
             level.padouch.vyhra = false;
+            X.Visible = false;
         }
 
         private void box_krokvpred_Click(object sender, EventArgs e)
@@ -781,6 +796,14 @@ namespace WarriorsOfTheBlackFieldForest
                 hudba.Text = "Music : On";
             }
         }
+
+        private void x_click(object sender, EventArgs e)
+        {
+            how_to_play.Visible = false;
+            X.Visible = false;
+        }
+
+
     }
 }
 
