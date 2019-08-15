@@ -12,6 +12,60 @@ namespace WarriorsOfTheBlackFieldForest
 {
     public partial class Hra : Form
     {
+        public struct Boxy
+        {
+            internal PictureBox[] boxy;
+            
+            public Boxy(PictureBox b1, PictureBox b2, PictureBox b3, PictureBox b4)
+            {
+                boxy = new PictureBox[] { b1, b2, b3, b4 };
+            }
+        }
+
+        public struct TimerKrok
+        {
+            internal Timer[] timery;
+            
+
+            public TimerKrok(Timer t1, Timer t2, Timer t3)
+            {
+                timery = new Timer[] { t1, t2, t3 };
+            }
+        }
+
+        public struct Zivot
+        {
+            internal Label show;
+            internal ProgressBar bar;
+
+            public Zivot(Label l, ProgressBar p)
+            {
+                show = l;
+                bar = p;
+            }
+        }
+
+        public struct Options
+
+
+        {
+            internal Button[] buttony;
+            public Options(Button b1, Button b2, Button b3, Button b4)
+            {
+                buttony = new Button[] { b1, b2, b3, b4 };
+
+            }
+        }
+
+        public struct Stats
+        {
+            internal Label[] staty;
+            public Stats(Label s1, Label s2, Label s3, Label s4)
+            {
+                staty = new Label[] { s1, s2, s3, s4 };
+            }
+        }
+
         public Hra()
         {
 
@@ -79,16 +133,8 @@ namespace WarriorsOfTheBlackFieldForest
                 spatny_utok.Interval = 1;
                 spatny_utok.Tick += new EventHandler(spatny_utok_Tick);
             }
-
-            //ikony akcii
-            {
-                Image obrazok_akcie_utok = Image.FromFile(@"mec.png");
-                Image obrazok_akcie_napi_sa = Properties.Resources.potion;
-                Image obrazok_akcie_krok_dozadu = Properties.Resources.sipka_vlavo;
-                Image obrazok_akcie_krok_dopredu = Properties.Resources.sipka_vpravo;
-            }
-
-            //hrdina
+            krok_hrdina = new TimerKrok(hrdina_timer_krok_vpred, hrdina_timer_krok_vzad, dopredny_utok);
+            krok_padouch = new TimerKrok(padouch_timer_krok_vpred, padouch_timer_krok_vzad, spatny_utok);
 
             //boxy
             {
@@ -136,48 +182,57 @@ namespace WarriorsOfTheBlackFieldForest
                 box_pitie.Click += new EventHandler(this.box_pitie_Click);
                 box_pitie.SendToBack();
             }
+            Boxy_akcii = new Boxy(box_krokvzad, box_krokvpred, box_mec, box_pitie);
 
-            hp_hrdina = new ProgressBar
+            //zivoty
             {
-                Size = new Size(80, 20),
-                Location = new Point(0, 0),
-                Minimum = 0,
-                Maximum = 10
-            };
-            Controls.Add(hp_hrdina);
+                hp_hrdina = new ProgressBar
+                {
+                    Size = new Size(80, 20),
+                    Location = new Point(0, 0),
+                    Minimum = 0,
+                    Maximum = 10
+                };
+                Controls.Add(hp_hrdina);
 
-            show_hp_hrdina = new Label
-            {
-                Size = new Size(2 * hp_hrdina.Size.Height, hp_hrdina.Size.Height),
-                Location = new Point(hp_hrdina.Location.X - Size.Height, hp_hrdina.Location.Y),
-                Text = hp_hrdina.Value.ToString(),
-                Parent = hp_hrdina,
-                TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = Color.Transparent
-            };
-            Controls.Add(show_hp_hrdina);
+                show_hp_hrdina = new Label
+                {
+                    Size = new Size(2 * hp_hrdina.Size.Height, hp_hrdina.Size.Height),
+                    Location = new Point(hp_hrdina.Location.X - Size.Height, hp_hrdina.Location.Y),
+                    Text = hp_hrdina.Value.ToString(),
+                    Parent = hp_hrdina,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    BackColor = Color.Transparent
+                };
+                Controls.Add(show_hp_hrdina);
 
-            hp_padouch = new ProgressBar
-            {
-                Size = new Size(80, 20),
-                Location = new Point(0, 0),
-                Minimum = 0,
-                Maximum = 10
-            };
-            Controls.Add(hp_padouch);
+                hp_padouch = new ProgressBar
+                {
+                    Size = new Size(80, 20),
+                    Location = new Point(0, 0),
+                    Minimum = 0,
+                    Maximum = 10
+                };
+                Controls.Add(hp_padouch);
 
-            show_hp_padouch = new Label
-            {
-                Size = new Size(2 * hp_padouch.Size.Height, hp_padouch.Size.Height),
-                Location = new Point(hp_padouch.Location.X - Size.Height, hp_padouch.Location.Y),
-                Text = hp_padouch.Value.ToString(),
-                TextAlign = ContentAlignment.MiddleCenter,
-                Parent = hp_padouch,
-                BackColor = Color.Transparent,
-            };
-            Controls.Add(show_hp_padouch);
+                show_hp_padouch = new Label
+                {
+                    Size = new Size(2 * hp_padouch.Size.Height, hp_padouch.Size.Height),
+                    Location = new Point(hp_padouch.Location.X - Size.Height, hp_padouch.Location.Y),
+                    Text = hp_padouch.Value.ToString(),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Parent = hp_padouch,
+                    BackColor = Color.Transparent,
+                };
+                Controls.Add(show_hp_padouch);
 
-            hrdina = new Hrdina(box_krokvzad, box_krokvpred, box_mec, box_pitie, hp_hrdina, show_hp_hrdina,hrdina_timer_krok_vpred,hrdina_timer_krok_vzad,dopredny_utok);
+                hrdina_zivot = new Zivot(show_hp_hrdina, hp_hrdina);
+                padouch_zivot = new Zivot(show_hp_padouch, hp_padouch);
+            }
+
+            //hrdina
+            hrdina = new Hrdina(Boxy_akcii, hrdina_zivot, krok_hrdina);
+
             hrdina.telo = new PictureBox
             {
                 Parent = pozadie,
@@ -190,7 +245,8 @@ namespace WarriorsOfTheBlackFieldForest
             Controls.Add(hrdina.telo);
 
             //padouch
-            padouch = new Padouch(hrdina, hp_padouch, show_hp_padouch,padouch_timer_krok_vpred,padouch_timer_krok_vzad,spatny_utok);
+            padouch = new Padouch(hrdina, padouch_zivot, krok_padouch);
+
             padouch.telo = new PictureBox
             {
                 Parent = pozadie,
@@ -321,80 +377,89 @@ namespace WarriorsOfTheBlackFieldForest
             };
             Controls.Add(xp_left);
 
-            option_1 = new Button
+            //options
             {
-                TextAlign = ContentAlignment.MiddleCenter,
-                Text = "+1 Potion (+5 HP)",
-                Size = new Size(140, 40),
-                Location = new Point(800, 370)
-            };
-            Controls.Add(option_1);
-            option_1.Click += new EventHandler(this.option_1_Click);
+                option_1 = new Button
+                {
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Text = "+1 Potion (+5 HP)",
+                    Size = new Size(140, 40),
+                    Location = new Point(800, 370)
+                };
+                Controls.Add(option_1);
+                option_1.Click += new EventHandler(this.option_1_Click);
 
-            option_2 = new Button
+                option_2 = new Button
+                {
+                    Text = "+3 attack",
+                    Size = new Size(140, 40),
+                    Location = new Point(800, 420)
+                };
+                Controls.Add(option_2);
+                option_2.Click += new EventHandler(this.option_2_Click);
+
+                option_3 = new Button
+                {
+                    Text = "+7 HP",
+                    Size = new Size(140, 40),
+                    Location = new Point(800, 470)
+                };
+                Controls.Add(option_3);
+                option_3.Click += new EventHandler(this.option_3_Click);
+
+                option_4 = new Button
+                {
+                    Text = "+2 defense",
+                    Size = new Size(140, 40),
+                    Location = new Point(800, 520)
+                };
+                Controls.Add(option_4);
+                option_4.Click += new EventHandler(this.option_4_Click);
+            }
+            optiony = new Options(option_1, option_2, option_3, option_4);
+
+            //staty
             {
-                Text = "+3 attack",
-                Size = new Size(140, 40),
-                Location = new Point(800, 420)
-            };
-            Controls.Add(option_2);
-            option_2.Click += new EventHandler(this.option_2_Click);
+                stat_1 = new Label
+                {
+                    Size = new Size(150, 50),
+                    Location = new Point(500, 370),
+                    Text = "  Potions :               __",
+                    TextAlign = ContentAlignment.MiddleLeft
+                };
+                Controls.Add(stat_1);
 
-            option_3 = new Button
-            {
-                Text = "+7 HP",
-                Size = new Size(140, 40),
-                Location = new Point(800, 470)
-            };
-            Controls.Add(option_3);
-            option_3.Click += new EventHandler(this.option_3_Click);
+                stat_2 = new Label
+                {
+                    Size = new Size(150, 50),
+                    Location = new Point(500, 420),
+                    Text = "  ATTACK :             __",
+                    TextAlign = ContentAlignment.MiddleLeft
+                };
+                Controls.Add(stat_2);
 
-            option_4 = new Button
-            {
-                Text = "+2 defense",
-                Size = new Size(140, 40),
-                Location = new Point(800, 520)
-            };
-            Controls.Add(option_4);
-            option_4.Click += new EventHandler(this.option_4_Click);
+                stat_3 = new Label
+                {
+                    Size = new Size(150, 50),
+                    Location = new Point(500, 470),
+                    Text = "  HP :                      __",
+                    TextAlign = ContentAlignment.MiddleLeft
+                };
+                Controls.Add(stat_3);
 
-            stat_1 = new Label
-            {
-                Size = new Size(150, 50),
-                Location = new Point(500, 370),
-                Text = "  Potions :               __",
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-            Controls.Add(stat_1);
+                stat_4 = new Label
+                {
+                    Size = new Size(150, 50),
+                    Location = new Point(500, 520),
+                    Text = "  DEFENSE :          __",
+                    TextAlign = ContentAlignment.MiddleLeft
+                };
+                Controls.Add(stat_4);
 
-            stat_2 = new Label
-            {
-                Size = new Size(150, 50),
-                Location = new Point(500, 420),
-                Text = "  ATTACK :             __",
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-            Controls.Add(stat_2);
+            }
+            statsy = new Stats(stat_1, stat_2, stat_3, stat_4);
 
-            stat_3 = new Label
-            {
-                Size = new Size(150, 50),
-                Location = new Point(500, 470),
-                Text = "  HP :                      __",
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-            Controls.Add(stat_3);
-
-            stat_4 = new Label
-            {
-                Size = new Size(150, 50),
-                Location = new Point(500, 520),
-                Text = "  DEFENSE :          __",
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-            Controls.Add(stat_4);
-
-            levelup = new LevelUp(xp_left, option_1, option_2, option_3, option_4, hrdina, stat_1, stat_2, stat_3, stat_4, pozadie, Napis_nad_levelom);
+            levelup = new LevelUp(xp_left, optiony, hrdina, statsy, pozadie, Napis_nad_levelom);
             levelup.zmizni();
 
             levelup.text_levelup.Parent = levelup.pozadie;
@@ -419,12 +484,23 @@ namespace WarriorsOfTheBlackFieldForest
         internal Timer hrdina_timer_krok_vzad;
         internal Timer padouch_timer_krok_vpred;
         internal Timer padouch_timer_krok_vzad;
+
         internal Timer dopredny_utok;
         internal Timer spatny_utok;
         internal Button hudba;
 
         internal int i;
         internal Button X;
+
+
+        internal Boxy Boxy_akcii;
+        internal TimerKrok krok_hrdina;
+        internal TimerKrok krok_padouch;
+        internal Zivot hrdina_zivot;
+        internal Zivot padouch_zivot;
+        internal Options optiony;
+        internal Stats statsy;
+
 
         //deklaracie
         internal Hrdina hrdina;
@@ -434,6 +510,7 @@ namespace WarriorsOfTheBlackFieldForest
         internal PictureBox box_krokvzad;
         internal PictureBox box_mec;
         internal PictureBox box_pitie;
+
         internal Label show_hp_hrdina;
         internal Random rnd;
         internal System.Media.SoundPlayer sp;
@@ -690,7 +767,7 @@ namespace WarriorsOfTheBlackFieldForest
             {   
                 hrdina.odmizni_akcie();
                 padouch.prebieha = false;
-                padouch_timer_krok_vpred.Stop();
+                padouch.krok_vpred_t.Stop();
             }
         }
 
@@ -707,7 +784,8 @@ namespace WarriorsOfTheBlackFieldForest
                 
                 hrdina.odmizni_akcie();
                 padouch.prebieha = false;
-                padouch_timer_krok_vzad.Stop();
+                padouch.krok_vzad_t.Stop();
+                
             }
         }
 
@@ -728,7 +806,7 @@ namespace WarriorsOfTheBlackFieldForest
 
                 if (hrdina.vykonane) rozhyb_padoucha();
                 else hrdina.urob_pohyb_neschopnosti();
-                hrdina_timer_krok_vpred.Stop();
+                hrdina.krok_vpred_t.Stop();
             }
         }
 
@@ -749,8 +827,8 @@ namespace WarriorsOfTheBlackFieldForest
 
                 if (hrdina.vykonane) rozhyb_padoucha();
                 else hrdina.urob_pohyb_neschopnosti();
-                hrdina_timer_krok_vzad.Stop();
-                hrdina_timer_krok_vzad.Enabled = false;
+                hrdina.krok_vzad_t.Stop();
+                hrdina.krok_vzad_t.Enabled = false;
             }
         }
 

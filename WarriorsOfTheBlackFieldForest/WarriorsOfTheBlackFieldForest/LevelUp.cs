@@ -25,19 +25,19 @@ namespace WarriorsOfTheBlackFieldForest
         internal PictureBox text_levelup;
         internal int obtiaznost;
 
-        public LevelUp(Label xp, Button o1, Button o2, Button o3, Button o4, Hrdina geroj, Label s1, Label s2, Label s3, Label s4, PictureBox pozadicko, PictureBox text)
+        public LevelUp(Label xp, Hra.Options o, Hrdina geroj, Hra.Stats s, PictureBox pozadicko, PictureBox text)
         {
             obtiaznost = 0;
             xp_left = xp;
-            option1 = o1;
-            option2 = o2;
-            option3 = o3;
-            option4 = o4;
+            option1 = o.buttony[0];
+            option2 = o.buttony[1];
+            option3 = o.buttony[2];
+            option4 = o.buttony[3];
             hrdina = geroj;
-            stat1 = s1;
-            stat2 = s2;
-            stat3 = s3;
-            stat4 = s4;
+            stat1 = s.staty[0];
+            stat2 = s.staty[1];
+            stat3 = s.staty[2];
+            stat4 = s.staty[3];
             pozadie = pozadicko;
             text_levelup = text;
             xp_now = hrdina.xp[obtiaznost];

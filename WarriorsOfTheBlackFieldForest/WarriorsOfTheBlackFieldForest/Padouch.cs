@@ -10,22 +10,22 @@ namespace WarriorsOfTheBlackFieldForest
 {
     public class Padouch : Postava
     {
-        public Padouch(Hrdina hrdina, ProgressBar ziv, Label uky, Timer krok_vpred, Timer krok_vzad, Timer utocny_krok)
+        public Padouch(Hrdina hrdina, Hra.Zivot ziv, Hra.TimerKrok krok)
         {
             //nastavi vhodnu obtiaznost
             rnd = new Random();
-            hpbar = ziv;
+            hpbar = ziv.bar;
             vygeneruj_bubaka(hrdina.level);
             //hpbar.Maximum = hrdina.level * 10;
             hpbar.Value = hpbar.Maximum;
             //ujma = jau;
             nepriatel = hrdina;
-            show_hp = uky;
+            show_hp = ziv.show;
             vyhra = false;
 
-            krok_vpred_t = krok_vpred;
-            krok_vzad_t = krok_vzad;
-            utok_pohyb = utocny_krok;
+            krok_vpred_t = krok.timery[0];
+            krok_vzad_t = krok.timery[1];
+            utok_pohyb = krok.timery[2];
 
             update_stats();
         }
