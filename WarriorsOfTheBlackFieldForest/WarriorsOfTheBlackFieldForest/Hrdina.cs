@@ -24,7 +24,7 @@ namespace WarriorsOfTheBlackFieldForest
             zivot = 10;
             utok = 2;
             obrana = 1;
-            rnd = new Random();
+            rand = new Random();
 
             level = 1;
             xp_k_disp = 0;
@@ -40,10 +40,10 @@ namespace WarriorsOfTheBlackFieldForest
 
             box_left = b.boxy[0];
             box_right = b.boxy[1];
-            box_potion = b.boxy[3];
-            box_sword = b.boxy[2];
+            box_potion = b.boxy[2];
+            box_sword = b.boxy[3];
 
-            boxy_akcii = new PictureBox[4] { box_left, box_right, box_potion, box_sword };
+            boxy_akcii = b.boxy;
 
             //ujma = au;
             show_hp = ziv.show;

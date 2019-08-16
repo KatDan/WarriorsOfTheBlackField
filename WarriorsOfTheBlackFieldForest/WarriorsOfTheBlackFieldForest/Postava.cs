@@ -20,7 +20,7 @@ namespace WarriorsOfTheBlackFieldForest
         internal Postava nepriatel;
         internal int pocet_potionov;
         internal bool vyhra;
-        internal Random rnd;
+        internal Random rand;
 
         internal int ciel_poz_x;
         internal bool prebieha;
@@ -41,19 +41,7 @@ namespace WarriorsOfTheBlackFieldForest
         internal Timer krok_vzad_t;
         internal Timer utok_pohyb;
 
-        public Postava()
-        {
-            zivot = 10;
-            utok = 1;
-            obrana = 1;
-            vzdialenost = 100;
-            level = 1;
-            xp_k_disp = 0;
-
-            staty[0] = zivot;
-            staty[1] = utok;
-            staty[2] = obrana;
-        }
+        public Postava() { }
 
         public Postava(PictureBox kvz, PictureBox kdo, PictureBox me, PictureBox pot, ProgressBar ziv, Label au, Label uky)
         {
@@ -82,6 +70,7 @@ namespace WarriorsOfTheBlackFieldForest
 
             ujma = au;
             show_hp = uky;
+            rand = new Random();
 
         }
 
@@ -97,14 +86,14 @@ namespace WarriorsOfTheBlackFieldForest
 
         internal int akt_sila_utoku;
 
-        Random rand = new Random();
+        //rand = new Random();
 
         //metody
 
-        public int lvl_xp_sum(int level)
+        public int lvl_xp_sum(int l)
         {
             int pom = 0;
-            for (int i = 0; i < level; i++)
+            for (int i = 0; i < l; i++)
             {
                 pom += xp[i];
             }
@@ -127,30 +116,7 @@ namespace WarriorsOfTheBlackFieldForest
             this.obrana = obrana;
         }
 
-        public void update_stats()
-        {
-            zivot = staty[0] / 2 + 2;
-            utok = staty[1] % (level + 1) + 1;
 
-            obrana = staty[2];
-
-            max_zivot = zivot;
-            hpbar.Maximum = zivot;
-            hpbar.Value = zivot;
-
-        }
-
-        public void vygeneruj_bubaka(int level)
-        {
-            xp_k_disp = lvl_xp_sum(level);
-            for (int i = 0; i < 3; i++)
-            {
-                int pom = rand.Next(0, xp_k_disp + 1);
-                staty[i] += pom;
-                xp_k_disp -= pom;
-            }
-            update_stats();
-        }
 
         public void Nastav_nepriatela(Postava nepritel)
         {
@@ -160,10 +126,11 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void sila_utoku()
         {
-            int a = rand.Next(0, 2);
+            Random rnd = new Random();
+            int a = rnd.Next(0, 2);
             if (a == 1) a = -1;
             else a = 1;
-            akt_sila_utoku = utok + a * rand.Next(0, utok / 2);
+            akt_sila_utoku = utok + a * rnd.Next(0, utok / 2);
         }
 
         public void utoc()
@@ -175,6 +142,7 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void bran_sa()
         {
+            Random rand = new Random();
             nepriatel.akt_sila_utoku -= (rand.Next(0, 51) / 40) * obrana;
         }
 
@@ -334,7 +302,7 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void Nahodna_akcia()
         {
-            //Random rnd = new Random();
+            Random rnd = new Random();
 
             if (vzdialenost <= 60)
             {
@@ -356,8 +324,50 @@ namespace WarriorsOfTheBlackFieldForest
                 }
             }
             if (vykonane == false) Nahodna_akcia();
+            
+        }
+
+        public void update_stats()
+        {
+            zivot = staty[0] * 2 + 2;
+            if (zivot < 7) zivot = 7;
+            utok = staty[1] % (level + 1) + 1;
+
+            obrana = staty[2];
+
+            max_zivot = zivot;
+            hpbar.Maximum = zivot;
+            hpbar.Value = zivot;
+            hpbar.Update();
+            show_hp.Text = nepriatel.hpbar.Value.ToString();
+            show_hp.Update();
+            
+
 
         }
+
+        public void vygeneruj_bubaka(int lev)
+        {
+            Random rnd = new Random();
+            xp_k_disp = lvl_xp_sum(lev);
+            for (int i = 0; i < staty.Length; i++)
+            {
+                staty[i]
+ = 0;
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                int pom = rnd.Next(0, xp_k_disp + 1);
+                staty[i] += pom;
+                xp_k_disp -= pom;
+            }
+            update_stats();
+            show_hp.Text = hpbar.Maximum.ToString();
+            show_hp.Update();
+            level = lev;
+        }
+
 
         public void tah_padoucha()
         {

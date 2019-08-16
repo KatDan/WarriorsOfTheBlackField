@@ -13,22 +13,28 @@ namespace WarriorsOfTheBlackFieldForest
         public Padouch(Hrdina hrdina, Hra.Zivot ziv, Hra.TimerKrok krok)
         {
             //nastavi vhodnu obtiaznost
-            rnd = new Random();
+           
             hpbar = ziv.bar;
-            vygeneruj_bubaka(hrdina.level);
+            
+            level = hrdina.level;
             //hpbar.Maximum = hrdina.level * 10;
             hpbar.Value = hpbar.Maximum;
             //ujma = jau;
             nepriatel = hrdina;
             show_hp = ziv.show;
             vyhra = false;
+            vygeneruj_bubaka(hrdina.level);
 
             krok_vpred_t = krok.timery[0];
             krok_vzad_t = krok.timery[1];
             utok_pohyb = krok.timery[2];
 
+            //this.rand = new Random();
+
             update_stats();
         }
+
+
 
         public override void urob_utocny_pohyb()
         {
@@ -67,7 +73,7 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void vygeneruj_telo()
         {
-            //Random rnd = new Random();
+            Random rnd = new Random();
             switch (rnd.Next(1, 12))
             {
                 case 1: telo.Image = Image.FromFile(@"bubak1-removebg.png"); break;

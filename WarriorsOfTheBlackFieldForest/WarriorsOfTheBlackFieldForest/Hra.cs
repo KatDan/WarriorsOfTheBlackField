@@ -72,7 +72,6 @@ namespace WarriorsOfTheBlackFieldForest
             sp = new System.Media.SoundPlayer(@"kitkatbeznikolka.wav");
             sp.PlayLooping();
             
-
             hudba = new Button
             {
                 Size = new Size(120, 40),
@@ -182,7 +181,7 @@ namespace WarriorsOfTheBlackFieldForest
                 box_pitie.Click += new EventHandler(this.box_pitie_Click);
                 box_pitie.SendToBack();
             }
-            Boxy_akcii = new Boxy(box_krokvzad, box_krokvpred, box_mec, box_pitie);
+            Boxy_akcii = new Boxy(box_krokvzad, box_krokvpred, box_pitie, box_mec);
 
             //zivoty
             {
@@ -492,7 +491,6 @@ namespace WarriorsOfTheBlackFieldForest
         internal int i;
         internal Button X;
 
-
         internal Boxy Boxy_akcii;
         internal TimerKrok krok_hrdina;
         internal TimerKrok krok_padouch;
@@ -517,7 +515,6 @@ namespace WarriorsOfTheBlackFieldForest
 
         internal Padouch padouch;
         internal ProgressBar hp_padouch;
-        //internal Label ujma_padouch;
         internal Label show_hp_padouch;
 
         internal Main_menu menu;
@@ -626,8 +623,12 @@ namespace WarriorsOfTheBlackFieldForest
             if (hrdina.pocet_potionov > 0)
             {
                 hrdina.pocet_potionov -= 1;
-                hrdina.zivot += 5;
-                if (hrdina.zivot + 5 <= hrdina.max_zivot) hrdina.hpbar.Value += 5;
+
+                if (hrdina.zivot + 5 <= hrdina.max_zivot)
+                {
+                    hrdina.zivot += 5;
+                    hrdina.hpbar.Value += 5;
+                } 
                 else hrdina.hpbar.Value = hrdina.hpbar.Maximum;
             }
             else hrdina.urob_pohyb_neschopnosti();
@@ -880,8 +881,6 @@ namespace WarriorsOfTheBlackFieldForest
             how_to_play.Visible = false;
             X.Visible = false;
         }
-
-
     }
 }
 
