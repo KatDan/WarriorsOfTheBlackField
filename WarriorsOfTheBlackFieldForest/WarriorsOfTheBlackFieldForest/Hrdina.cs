@@ -61,6 +61,7 @@ namespace WarriorsOfTheBlackFieldForest
         public void vytvor_zakladneho_hrdinu()
         {
             zivot = 10;
+            max_zivot = 10;
             utok = 2;
             obrana = 1;
 
@@ -74,6 +75,8 @@ namespace WarriorsOfTheBlackFieldForest
 
             hpbar.Maximum = zivot;
             hpbar.Value = hpbar.Maximum;
+            show_hp.Text = hpbar.Maximum.ToString();
+
         }
 
         public void ukaz_sa()

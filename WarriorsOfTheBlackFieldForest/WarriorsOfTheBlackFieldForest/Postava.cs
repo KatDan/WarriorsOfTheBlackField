@@ -20,7 +20,7 @@ namespace WarriorsOfTheBlackFieldForest
         internal Postava nepriatel;
         internal int pocet_potionov;
         internal bool vyhra;
-        internal Random rand;
+        internal static Random rand;
 
         internal int ciel_poz_x;
         internal bool prebieha;
@@ -126,11 +126,11 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void sila_utoku()
         {
-            Random rnd = new Random();
-            int a = rnd.Next(0, 2);
+            //Random rnd = new Random();
+            int a = rand.Next(0, 2);
             if (a == 1) a = -1;
             else a = 1;
-            akt_sila_utoku = utok + a * rnd.Next(0, utok / 2);
+            akt_sila_utoku = utok + a * rand.Next(0, utok / 2);
         }
 
         public void utoc()
@@ -142,7 +142,7 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void bran_sa()
         {
-            Random rand = new Random();
+            //Random rand = new Random();
             nepriatel.akt_sila_utoku -= (rand.Next(0, 51) / 40) * obrana;
         }
 
@@ -300,13 +300,14 @@ namespace WarriorsOfTheBlackFieldForest
             }
         }
 
+        //iny mechanizmus pre padoucha
         public void Nahodna_akcia()
         {
-            Random rnd = new Random();
+            //Random rnd = new Random();
 
             if (vzdialenost <= 60)
             {
-                switch (rnd.Next(0, 4))
+                switch (rand.Next(0, 4))
                 {
                     case 0: akcia_krok_dopredu(); break;
                     default: akcia_utok(); break;
@@ -314,7 +315,7 @@ namespace WarriorsOfTheBlackFieldForest
             }
             else
             {
-                switch (rnd.Next(0, 5))
+                switch (rand.Next(0, 5))
                 {
                     case 0: akcia_krok_dopredu(); break;
                     case 1: akcia_krok_dopredu(); break;
@@ -348,7 +349,7 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void vygeneruj_bubaka(int lev)
         {
-            Random rnd = new Random();
+            //Random rnd = new Random();
             xp_k_disp = lvl_xp_sum(lev);
             for (int i = 0; i < staty.Length; i++)
             {
@@ -358,7 +359,7 @@ namespace WarriorsOfTheBlackFieldForest
 
             for (int i = 0; i < 3; i++)
             {
-                int pom = rnd.Next(0, xp_k_disp + 1);
+                int pom = rand.Next(0, xp_k_disp + 1);
                 staty[i] += pom;
                 xp_k_disp -= pom;
             }

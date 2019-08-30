@@ -85,7 +85,7 @@ namespace WarriorsOfTheBlackFieldForest
             how_to_play = new Label
             {
                 Size = new Size(900, 300),
-                Location = new Point(50, 350),
+                Location = new Point(50, 250),
                 Text = "HOW TO PLAY:\n" +
                 "==================\n" +
                 "You went camping to the Black Field forest with your friends and while you were on a walk, they ate all Horalky you had. Naturally, you got really angry.\n" +
@@ -326,15 +326,17 @@ namespace WarriorsOfTheBlackFieldForest
                 Controls.Add(pozadie_menu);
 
 
-                X = new Button
+                X_how_to_play = new Button
                 {
                     Text = "X",
                     Visible = false,
                     Size = new Size(40,40),
-                    Location = new Point(910,350),
+                    Location = new Point(how_to_play.Location.X + how_to_play.Width - 40,how_to_play.Location.Y),
                 };
-                Controls.Add(X);
-                X.Click += new EventHandler(x_click);
+                Controls.Add(X_how_to_play);
+                X_how_to_play.Click += new EventHandler(x_how_to_play_click);
+
+                
 
             }
             menu = new Main_menu(this.Napis_nad_levelom, this.button_NovaHra, this.button_How_to_play, this.button_Credits, this.pozadie_menu);
@@ -477,6 +479,18 @@ namespace WarriorsOfTheBlackFieldForest
             rnd = new Random();
 
             InitializeComponent();
+
+            X_credits = new Button
+            {
+                Size = new Size(30, 30),
+                Text = "X",
+                Location = new Point(titulky.Location.X + titulky.Width, titulky.Location.Y),
+                Visible = false
+            };
+            Controls.Add(X_credits);
+            X_credits.BringToFront();
+            
+            X_credits.Click += new EventHandler(x_credits_click);
         }
 
         internal Timer hrdina_timer_krok_vpred;
@@ -489,7 +503,8 @@ namespace WarriorsOfTheBlackFieldForest
         internal Button hudba;
 
         internal int i;
-        internal Button X;
+        internal Button X_how_to_play;
+        internal Button X_credits;
 
         internal Boxy Boxy_akcii;
         internal TimerKrok krok_hrdina;
@@ -544,6 +559,8 @@ namespace WarriorsOfTheBlackFieldForest
             button_Credits.Visible = false;
             titulky.Visible = true;
             titulky.BringToFront();
+            X_credits.Visible = true;
+            X_credits.BringToFront();
         }
 
         private void Nazov_hry_Click(object sender, EventArgs e)
@@ -564,8 +581,8 @@ namespace WarriorsOfTheBlackFieldForest
             button_Credits.Visible = false;
             how_to_play.Visible = true;
             titulky.Visible = false;
-            X.Visible = true;
-            X.BringToFront();
+            X_how_to_play.Visible = true;
+            X_how_to_play.BringToFront();
         }
 
         private void button_NovaHra_Click(object sender, EventArgs e)
@@ -585,7 +602,7 @@ namespace WarriorsOfTheBlackFieldForest
             level.padouch.hpbar.Value = level.padouch.hpbar.Maximum;
             button_NovaHra.Visible = false;
             level.padouch.vyhra = false;
-            X.Visible = false;
+            X_how_to_play.Visible = false;
         }
 
         private void box_krokvpred_Click(object sender, EventArgs e)
@@ -624,7 +641,7 @@ namespace WarriorsOfTheBlackFieldForest
             {
                 hrdina.pocet_potionov -= 1;
 
-                if (hrdina.zivot + 5 <= hrdina.max_zivot)
+                if (hrdina.hpbar.Value + 5 <= hrdina.hpbar.Maximum)
                 {
                     hrdina.zivot += 5;
                     hrdina.hpbar.Value += 5;
@@ -876,10 +893,17 @@ namespace WarriorsOfTheBlackFieldForest
             }
         }
 
-        private void x_click(object sender, EventArgs e)
+        private void x_how_to_play_click(object sender, EventArgs e)
         {
             how_to_play.Visible = false;
-            X.Visible = false;
+            X_how_to_play.Visible = false;
+        }
+
+        private void x_credits_click(object sender, EventArgs e)
+        {
+            titulky.Visible = false;
+            button_Credits.Visible = true;
+            X_credits.Visible = false;
         }
     }
 }
