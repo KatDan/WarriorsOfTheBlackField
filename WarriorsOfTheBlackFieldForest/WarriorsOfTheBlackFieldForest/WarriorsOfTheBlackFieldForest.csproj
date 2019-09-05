@@ -55,7 +55,7 @@
     <Compile Include="Hrdina.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="LevelUp.cs" />
-    <Compile Include="Main_menu.cs" />
+    <Compile Include="HlavneMenu.cs" />
     <Compile Include="Padouch.cs" />
     <Compile Include="Postava.cs" />
     <Compile Include="Program.cs" />
