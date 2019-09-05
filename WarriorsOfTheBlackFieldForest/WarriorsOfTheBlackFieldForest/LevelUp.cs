@@ -10,60 +10,60 @@ namespace WarriorsOfTheBlackFieldForest
 {
     public class LevelUp
     {
-        internal Label xp_left;
-        internal int xp_now;
-        internal Button option1;
-        internal Button option2;
-        internal Button option3;
-        internal Button option4;
+        internal Label zvysne_xp;
+        internal int xp_teraz;
+        internal Button moznost1;
+        internal Button moznost2;
+        internal Button moznost3;
+        internal Button moznost4;
         internal Hrdina hrdina;
-        internal Label stat1;
-        internal Label stat2;
-        internal Label stat3;
-        internal Label stat4;
+        internal Label atribut1;
+        internal Label atribut2;
+        internal Label atribut3;
+        internal Label atribut4;
         internal PictureBox pozadie;
         internal PictureBox text_levelup;
         internal int obtiaznost;
 
-        public LevelUp(Label xp, Hra.Options o, Hrdina geroj, Hra.Stats s, PictureBox pozadicko, PictureBox text)
+        public LevelUp(Label xp, Hra.Moznosti o, Hrdina geroj, Hra.Atributy s, PictureBox pozadicko, PictureBox text)
         {
             obtiaznost = 0;
-            xp_left = xp;
-            option1 = o.buttony[0];
-            option2 = o.buttony[1];
-            option3 = o.buttony[2];
-            option4 = o.buttony[3];
+            zvysne_xp = xp;
+            moznost1 = o.tlacitka[0];
+            moznost2 = o.tlacitka[1];
+            moznost3 = o.tlacitka[2];
+            moznost4 = o.tlacitka[3];
             hrdina = geroj;
-            stat1 = s.staty[0];
-            stat2 = s.staty[1];
-            stat3 = s.staty[2];
-            stat4 = s.staty[3];
+            atribut1 = s.atributy[0];
+            atribut2 = s.atributy[1];
+            atribut3 = s.atributy[2];
+            atribut4 = s.atributy[3];
             pozadie = pozadicko;
             text_levelup = text;
-            xp_now = hrdina.xp[obtiaznost];
+            xp_teraz = hrdina.xp[obtiaznost];
         }
 
         public void ukaz_sa()
         {
-            updateni_veci();
+            aktualizuj_veci();
             text_levelup.Image = Image.FromFile(@"levelupys.png");
-            xp_left.Visible = true;
-            option1.Visible = true;
-            option2.Visible = true;
-            option3.Visible = true;
-            option4.Visible = true;
+            zvysne_xp.Visible = true;
+            moznost1.Visible = true;
+            moznost2.Visible = true;
+            moznost3.Visible = true;
+            moznost4.Visible = true;
             hrdina.telo.Location = new Point(200, hrdina.telo.Location.Y);
             hrdina.telo.Visible = true;
-            stat1.Visible = true;
-            stat2.Visible = true;
-            stat3.Visible = true;
-            stat4.Visible = true;
+            atribut1.Visible = true;
+            atribut2.Visible = true;
+            atribut3.Visible = true;
+            atribut4.Visible = true;
             hrdina.nepriatel.telo.Visible = false;
             hrdina.nepriatel.hpbar.Visible = false;
-            hrdina.nepriatel.show_hp.Visible = false;
+            hrdina.nepriatel.ukaz_hp.Visible = false;
             pozadie.SendToBack();
             hrdina.hpbar.Visible = false;
-            hrdina.show_hp.Visible = false;
+            hrdina.ukaz_hp.Visible = false;
             text_levelup.Visible = true;
             text_levelup.BringToFront();
             hrdina.zmizni_akcie();
@@ -71,25 +71,25 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void zmizni()
         {
-            xp_left.Visible = false;
-            option1.Visible = false;
-            option2.Visible = false;
-            option3.Visible = false;
-            option4.Visible = false;
+            zvysne_xp.Visible = false;
+            moznost1.Visible = false;
+            moznost2.Visible = false;
+            moznost3.Visible = false;
+            moznost4.Visible = false;
             //hrdina.telo.Visible = false;
-            stat1.Visible = false;
-            stat2.Visible = false;
-            stat3.Visible = false;
-            stat4.Visible = false;
+            atribut1.Visible = false;
+            atribut2.Visible = false;
+            atribut3.Visible = false;
+            atribut4.Visible = false;
         }
 
-        public void updateni_veci()
+        public void aktualizuj_veci()
         {
-            stat1.Text = "  Potions :               " + hrdina.pocet_potionov.ToString();
-            stat2.Text = "  ATTACK :             " + hrdina.utok.ToString();
-            stat3.Text = "  HP :                      " + hrdina.max_zivot.ToString();
-            stat4.Text = "  DEFENSE :          " + hrdina.obrana.ToString();
-            xp_left.Text = "Each upgrade costs 1 xp:\n" + xp_now.ToString() + " xp left";
+            atribut1.Text = "  Potions :               " + hrdina.pocet_elixirov.ToString();
+            atribut2.Text = "  ATTACK :             " + hrdina.utok.ToString();
+            atribut3.Text = "  HP :                      " + hrdina.max_zivot.ToString();
+            atribut4.Text = "  DEFENSE :          " + hrdina.obrana.ToString();
+            zvysne_xp.Text = "Each upgrade costs 1 xp:\n" + xp_teraz.ToString() + " xp left";
 
         }
     }

@@ -7,30 +7,30 @@ using System.Windows.Forms;
 
 namespace WarriorsOfTheBlackFieldForest
 {
-    public class Main_menu
+    public class HlavneMenu
     {
         internal PictureBox nazov;
         internal Button nova_hra;
         internal Button skore;
-        internal Button credits;
+        internal Button kredity;
         internal PictureBox pozadicko;
 
-        public Main_menu(PictureBox nazovv, Button nova_hra, Button skore, Button credits, PictureBox pozadicko)
+        public HlavneMenu(PictureBox nazovv, Button nova_hra, Button skore, Button credits, PictureBox pozadicko)
         {
             nazov = nazovv;
             this.nova_hra = nova_hra;
             this.skore = skore;
-            this.credits = credits;
+            this.kredity = credits;
             this.pozadicko = pozadicko;
         }
 
-        public void Zmizni_menu()
+        public void zmizni_menu()
         {
             nazov.Visible = false;
             nova_hra.Visible = false;
             skore.Visible = false;
             //pozadicko.Visible = false;
-            credits.Visible = false;
+            kredity.Visible = false;
         }
     }
 }

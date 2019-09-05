@@ -21,9 +21,9 @@ namespace WarriorsOfTheBlackFieldForest
             hpbar.Value = hpbar.Maximum;
             //ujma = jau;
             nepriatel = hrdina;
-            show_hp = ziv.show;
+            ukaz_hp = ziv.ukaz;
             vyhra = false;
-            vygeneruj_bubaka(hrdina.level);
+            vygeneruj_nepriatela(hrdina.level);
 
             krok_vpred_t = krok.timery[0];
             krok_vzad_t = krok.timery[1];
@@ -31,7 +31,7 @@ namespace WarriorsOfTheBlackFieldForest
 
             //this.rand = new Random();
 
-            update_stats();
+            aktualizuj_atributy();
         }
 
 
@@ -73,8 +73,8 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void vygeneruj_telo()
         {
-            Random rnd = new Random();
-            switch (rnd.Next(1, 12))
+            Random nahodne = new Random();
+            switch (nahodne.Next(1, 12))
             {
                 case 1: telo.Image = Image.FromFile(@"bubak1-removebg.png"); break;
                 case 2: telo.Image = Image.FromFile(@"bubak2-removebg.png"); break;
@@ -129,7 +129,7 @@ namespace WarriorsOfTheBlackFieldForest
         public void ukaz_sa()
         {
             telo.Visible = true;
-            show_hp.Visible = true;
+            ukaz_hp.Visible = true;
             hpbar.Visible = true;
         }
     }

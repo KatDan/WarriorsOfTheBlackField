@@ -15,7 +15,7 @@ namespace WarriorsOfTheBlackFieldForest
         internal Padouch padouch;
         internal int obtiaznost;
         internal PictureBox nazov_levelu;
-        internal Random rnd;
+        internal Random nahodne;
 
         public Level(int uroven, Hrdina hhrdina, Padouch padouch, PictureBox pozadiee, PictureBox nazov)
         {
@@ -23,10 +23,10 @@ namespace WarriorsOfTheBlackFieldForest
             this.hrdina = hhrdina;
             this.pozadie = pozadiee;
             nazov_levelu = nazov;
-            rnd = new Random();
+            nahodne = new Random();
             //nepriatel
             this.padouch = padouch;
-            padouch.vygeneruj_bubaka(uroven);
+            padouch.vygeneruj_nepriatela(uroven);
         }
 
         public void nastav_nazov(int i)
@@ -45,7 +45,7 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void vygeneruj_pozadie()
         {
-            switch (rnd.Next(1, 10))
+            switch (nahodne.Next(1, 10))
             {
                 case 1: pozadie.Image = Image.FromFile(@"gif1.gif"); break;
                 case 2: pozadie.Image = Image.FromFile(@"gif2.gif"); break;
@@ -67,7 +67,7 @@ namespace WarriorsOfTheBlackFieldForest
             vygeneruj_pozadie();
             hrdina.odmizni_akcie();
             nastav_nazov(hrdina.level);
-            padouch.vygeneruj_bubaka(hrdina.level);
+            padouch.vygeneruj_nepriatela(hrdina.level);
             hrdina.nastav_vychodziu_poziciu();
             padouch.nastav_vychodziu_poziciu();
             padouch.vygeneruj_telo();
@@ -77,7 +77,7 @@ namespace WarriorsOfTheBlackFieldForest
             hrdina.nepriatel = padouch;
             hrdina.zisti_vzdialenost();
             hrdina.hpbar.Value = hrdina.hpbar.Maximum;
-            hrdina.show_hp.Text = hrdina.max_zivot.ToString();
+            hrdina.ukaz_hp.Text = hrdina.max_zivot.ToString();
             padouch.hpbar.Maximum = padouch.max_zivot;
 
             padouch.hpbar.Value = padouch.max_zivot;

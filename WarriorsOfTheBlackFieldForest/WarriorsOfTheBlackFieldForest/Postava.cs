@@ -18,9 +18,9 @@ namespace WarriorsOfTheBlackFieldForest
         internal int level = 1;
         internal int xp_k_disp = 5;
         internal Postava nepriatel;
-        internal int pocet_potionov;
+        internal int pocet_elixirov;
         internal bool vyhra;
-        internal static Random rand;
+        internal static Random nahodne;
 
         internal int ciel_poz_x;
         internal bool prebieha;
@@ -28,14 +28,14 @@ namespace WarriorsOfTheBlackFieldForest
         //vizual
         internal ProgressBar hpbar;
         internal Label ujma;
-        internal PictureBox box_left;
-        internal PictureBox box_right;
-        internal PictureBox box_potion;
-        internal PictureBox box_sword;
+        internal PictureBox box_vlavo;
+        internal PictureBox box_vpravo;
+        internal PictureBox box_elixir;
+        internal PictureBox box_mec;
         internal PictureBox telo;
         internal PictureBox[] boxy_akcii;
         internal Boolean vykonane;
-        internal Label show_hp;
+        internal Label ukaz_hp;
 
         internal Timer krok_vpred_t;
         internal Timer krok_vzad_t;
@@ -45,7 +45,7 @@ namespace WarriorsOfTheBlackFieldForest
 
         public Postava(PictureBox kvz, PictureBox kdo, PictureBox me, PictureBox pot, ProgressBar ziv, Label au, Label uky)
         {
-            pocet_potionov = 0;
+            pocet_elixirov = 0;
             zivot = 10;
             utok = 2;
             obrana = 1;
@@ -54,23 +54,23 @@ namespace WarriorsOfTheBlackFieldForest
             xp_k_disp = 0;
             vyhra = false;
 
-            staty[0] = zivot;
-            staty[1] = utok;
-            staty[2] = obrana;
+            atributy[0] = zivot;
+            atributy[1] = utok;
+            atributy[2] = obrana;
 
             hpbar = ziv;
             hpbar.Maximum = zivot;
 
-            box_left = kvz;
-            box_right = kdo;
-            box_potion = pot;
-            box_sword = me;
+            box_vlavo = kvz;
+            box_vpravo = kdo;
+            box_elixir = pot;
+            box_mec = me;
 
-            boxy_akcii = new PictureBox[4] { box_left, box_right, box_potion, box_sword };
+            boxy_akcii = new PictureBox[4] { box_vlavo, box_vpravo, box_elixir, box_mec };
 
             ujma = au;
-            show_hp = uky;
-            rand = new Random();
+            ukaz_hp = uky;
+            nahodne = new Random();
 
         }
 
@@ -82,7 +82,7 @@ namespace WarriorsOfTheBlackFieldForest
         }
 
         internal int[] xp = new int[] { 2, 2, 3, 3, 3 };
-        internal int[] staty = new int[3];
+        internal int[] atributy = new int[3];
 
         internal int akt_sila_utoku;
 
@@ -90,7 +90,7 @@ namespace WarriorsOfTheBlackFieldForest
 
         //metody
 
-        public int lvl_xp_sum(int l)
+        public int lvl_xp_sucet(int l)
         {
             int pom = 0;
             for (int i = 0; i < l; i++)
@@ -118,7 +118,7 @@ namespace WarriorsOfTheBlackFieldForest
 
 
 
-        public void Nastav_nepriatela(Postava nepritel)
+        public void nastav_nepriatela(Postava nepritel)
         {
             nepriatel = nepritel;
             vzdialenost = nepritel.telo.Location.X - telo.Location.X;
@@ -127,10 +127,10 @@ namespace WarriorsOfTheBlackFieldForest
         public void sila_utoku()
         {
             //Random rnd = new Random();
-            int a = rand.Next(0, 2);
+            int a = nahodne.Next(0, 2);
             if (a == 1) a = -1;
             else a = 1;
-            akt_sila_utoku = utok + a * rand.Next(0, utok / 2);
+            akt_sila_utoku = utok + a * nahodne.Next(0, utok / 2);
         }
 
         public void utoc()
@@ -143,7 +143,7 @@ namespace WarriorsOfTheBlackFieldForest
         public void bran_sa()
         {
             //Random rand = new Random();
-            nepriatel.akt_sila_utoku -= (rand.Next(0, 51) / 40) * obrana;
+            nepriatel.akt_sila_utoku -= (nahodne.Next(0, 51) / 40) * obrana;
         }
 
         public void urob_pohyb_neschopnosti()
@@ -165,7 +165,7 @@ namespace WarriorsOfTheBlackFieldForest
             }
             //odmizni_akcie();
             hpbar.Visible = true;
-            show_hp.Visible = true;
+            ukaz_hp.Visible = true;
             vykonane = true;
         }
 
@@ -191,14 +191,14 @@ namespace WarriorsOfTheBlackFieldForest
                 sila_utoku();
                 nepriatel.bran_sa();
                 utoc();
-                nepriatel.show_hp.Update();
+                nepriatel.ukaz_hp.Update();
                 //urob_utocny_pohyb();
                 //zobraz_ujmu();
                 vykonane = true;
                 animacia_utoku();
-                nepriatel.show_hp.Text = nepriatel.hpbar.Value.ToString();
-                show_hp.Text = hpbar.Value.ToString();
-                show_hp.Update();
+                nepriatel.ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
+                ukaz_hp.Text = hpbar.Value.ToString();
+                ukaz_hp.Update();
                 hpbar.Update();
                 nepriatel.hpbar.Update();
 
@@ -254,7 +254,7 @@ namespace WarriorsOfTheBlackFieldForest
         {
             telo.Location = new Point(x, y);
             hpbar.Location = new Point(telo.Location.X, telo.Location.Y - 10);
-            show_hp.Location = new Point(hpbar.Location.X - show_hp.Size.Width, hpbar.Location.Y);
+            ukaz_hp.Location = new Point(hpbar.Location.X - ukaz_hp.Size.Width, hpbar.Location.Y);
 
             hpbar.BringToFront();
 
@@ -270,8 +270,8 @@ namespace WarriorsOfTheBlackFieldForest
             }
             telo.BringToFront();
             hpbar.BringToFront();
-            show_hp.BringToFront();
-            show_hp.Text = hpbar.Value.ToString();
+            ukaz_hp.BringToFront();
+            ukaz_hp.Text = hpbar.Value.ToString();
         }
 
         public virtual void urob_utocny_pohyb()
@@ -301,13 +301,13 @@ namespace WarriorsOfTheBlackFieldForest
         }
 
         //iny mechanizmus pre padoucha
-        public void Nahodna_akcia()
+        public void nahodna_akcia()
         {
             //Random rnd = new Random();
 
             if (vzdialenost <= 60)
             {
-                switch (rand.Next(0, 4))
+                switch (nahodne.Next(0, 4))
                 {
                     case 0: akcia_krok_dopredu(); break;
                     default: akcia_utok(); break;
@@ -315,7 +315,7 @@ namespace WarriorsOfTheBlackFieldForest
             }
             else
             {
-                switch (rand.Next(0, 5))
+                switch (nahodne.Next(0, 5))
                 {
                     case 0: akcia_krok_dopredu(); break;
                     case 1: akcia_krok_dopredu(); break;
@@ -324,58 +324,58 @@ namespace WarriorsOfTheBlackFieldForest
                     default: akcia_utok(); break;
                 }
             }
-            if (vykonane == false) Nahodna_akcia();
+            if (vykonane == false) nahodna_akcia();
             
         }
 
-        public void update_stats()
+        public void aktualizuj_atributy()
         {
-            zivot = staty[0] * 2 + 2;
+            zivot = atributy[0] * 2 + 2;
             if (zivot < 7) zivot = 7;
-            utok = staty[1] % (level + 1) + 1;
+            utok = atributy[1] % (level + 1) + 1;
 
-            obrana = staty[2];
+            obrana = atributy[2];
 
             max_zivot = zivot;
             hpbar.Maximum = zivot;
             hpbar.Value = zivot;
             hpbar.Update();
-            show_hp.Text = nepriatel.hpbar.Value.ToString();
-            show_hp.Update();
+            ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
+            ukaz_hp.Update();
             
 
 
         }
 
-        public void vygeneruj_bubaka(int lev)
+        public void vygeneruj_nepriatela(int lev)
         {
             //Random rnd = new Random();
-            xp_k_disp = lvl_xp_sum(lev);
-            for (int i = 0; i < staty.Length; i++)
+            xp_k_disp = lvl_xp_sucet(lev);
+            for (int i = 0; i < atributy.Length; i++)
             {
-                staty[i]
+                atributy[i]
  = 0;
             }
 
             for (int i = 0; i < 3; i++)
             {
-                int pom = rand.Next(0, xp_k_disp + 1);
-                staty[i] += pom;
+                int pom = nahodne.Next(0, xp_k_disp + 1);
+                atributy[i] += pom;
                 xp_k_disp -= pom;
             }
-            update_stats();
-            show_hp.Text = hpbar.Maximum.ToString();
-            show_hp.Update();
+            aktualizuj_atributy();
+            ukaz_hp.Text = hpbar.Maximum.ToString();
+            ukaz_hp.Update();
             level = lev;
         }
 
 
-        public void tah_padoucha()
+        public void tah_nepriatela()
         {
             //zmizni_akcie();
-            nepriatel.Nahodna_akcia();
-            nepriatel.show_hp.Text = nepriatel.hpbar.Value.ToString();
-            nepriatel.show_hp.Update();
+            nepriatel.nahodna_akcia();
+            nepriatel.ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
+            nepriatel.ukaz_hp.Update();
             //pockej si
             //odmizni_akcie();
         }
@@ -402,7 +402,7 @@ namespace WarriorsOfTheBlackFieldForest
             }
             odmizni_akcie();
             hpbar.Visible = true;
-            show_hp.Visible = true;
+            ukaz_hp.Visible = true;
 
         }
     }

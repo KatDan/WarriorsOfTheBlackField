@@ -35,9 +35,9 @@
             this.krok = new System.Windows.Forms.Timer(this.components);
             this.ukaz_rany = new System.Windows.Forms.Timer(this.components);
             this.titulky = new System.Windows.Forms.Label();
-            this.button_Credits = new System.Windows.Forms.Button();
-            this.button_How_to_play = new System.Windows.Forms.Button();
-            this.button_NovaHra = new System.Windows.Forms.Button();
+            this.tlacitko_kredity = new System.Windows.Forms.Button();
+            this.tlacitko_how_to_play = new System.Windows.Forms.Button();
+            this.tlacitko_new_game = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pozadie_menu)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,38 +80,38 @@
             // 
             // button_Credits
             // 
-            this.button_Credits.Font = new System.Drawing.Font("Carta Magna Line", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Credits.Location = new System.Drawing.Point(350, 414);
-            this.button_Credits.Name = "button_Credits";
-            this.button_Credits.Size = new System.Drawing.Size(300, 60);
-            this.button_Credits.TabIndex = 4;
-            this.button_Credits.Text = "Credits";
-            this.button_Credits.UseVisualStyleBackColor = true;
-            this.button_Credits.Visible = false;
-            this.button_Credits.Click += new System.EventHandler(this.button_kredity_Click);
+            this.tlacitko_kredity.Font = new System.Drawing.Font("Carta Magna Line", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlacitko_kredity.Location = new System.Drawing.Point(350, 414);
+            this.tlacitko_kredity.Name = "button_Credits";
+            this.tlacitko_kredity.Size = new System.Drawing.Size(300, 60);
+            this.tlacitko_kredity.TabIndex = 4;
+            this.tlacitko_kredity.Text = "Credits";
+            this.tlacitko_kredity.UseVisualStyleBackColor = true;
+            this.tlacitko_kredity.Visible = false;
+            this.tlacitko_kredity.Click += new System.EventHandler(this.tlacitko_kredity_Click);
             // 
             // button_How_to_play
             // 
-            this.button_How_to_play.Font = new System.Drawing.Font("Carta Magna Line", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_How_to_play.Location = new System.Drawing.Point(350, 341);
-            this.button_How_to_play.Name = "button_How_to_play";
-            this.button_How_to_play.Size = new System.Drawing.Size(300, 60);
-            this.button_How_to_play.TabIndex = 3;
-            this.button_How_to_play.Text = "High Score";
-            this.button_How_to_play.UseVisualStyleBackColor = true;
-            this.button_How_to_play.Visible = false;
+            this.tlacitko_how_to_play.Font = new System.Drawing.Font("Carta Magna Line", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlacitko_how_to_play.Location = new System.Drawing.Point(350, 341);
+            this.tlacitko_how_to_play.Name = "button_How_to_play";
+            this.tlacitko_how_to_play.Size = new System.Drawing.Size(300, 60);
+            this.tlacitko_how_to_play.TabIndex = 3;
+            this.tlacitko_how_to_play.Text = "High Score";
+            this.tlacitko_how_to_play.UseVisualStyleBackColor = true;
+            this.tlacitko_how_to_play.Visible = false;
             // 
             // button_NovaHra
             // 
-            this.button_NovaHra.Font = new System.Drawing.Font("Carta Magna Line", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_NovaHra.Location = new System.Drawing.Point(350, 268);
-            this.button_NovaHra.Name = "button_NovaHra";
-            this.button_NovaHra.Size = new System.Drawing.Size(300, 60);
-            this.button_NovaHra.TabIndex = 2;
-            this.button_NovaHra.Text = "New Game";
-            this.button_NovaHra.UseVisualStyleBackColor = true;
-            this.button_NovaHra.Visible = false;
-            this.button_NovaHra.Click += new System.EventHandler(this.button_NovaHra_Click);
+            this.tlacitko_new_game.Font = new System.Drawing.Font("Carta Magna Line", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlacitko_new_game.Location = new System.Drawing.Point(350, 268);
+            this.tlacitko_new_game.Name = "button_NovaHra";
+            this.tlacitko_new_game.Size = new System.Drawing.Size(300, 60);
+            this.tlacitko_new_game.TabIndex = 2;
+            this.tlacitko_new_game.Text = "New Game";
+            this.tlacitko_new_game.UseVisualStyleBackColor = true;
+            this.tlacitko_new_game.Visible = false;
+            this.tlacitko_new_game.Click += new System.EventHandler(this.tlacitko_nova_hra_Click);
             // 
             // Hra
             // 
@@ -119,9 +119,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 653);
             this.Controls.Add(this.titulky);
-            this.Controls.Add(this.button_Credits);
-            this.Controls.Add(this.button_How_to_play);
-            this.Controls.Add(this.button_NovaHra);
+            this.Controls.Add(this.tlacitko_kredity);
+            this.Controls.Add(this.tlacitko_how_to_play);
+            this.Controls.Add(this.tlacitko_new_game);
             this.Controls.Add(this.pozadie_menu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -142,9 +142,9 @@
         private System.Windows.Forms.Timer krok;
         private System.Windows.Forms.Timer ukaz_rany;
         private System.Windows.Forms.Label titulky;
-        private System.Windows.Forms.Button button_Credits;
-        private System.Windows.Forms.Button button_How_to_play;
-        private System.Windows.Forms.Button button_NovaHra;
+        private System.Windows.Forms.Button tlacitko_kredity;
+        private System.Windows.Forms.Button tlacitko_how_to_play;
+        private System.Windows.Forms.Button tlacitko_new_game;
     }
 }
 

@@ -24,29 +24,29 @@ namespace WarriorsOfTheBlackFieldForest
             zivot = 10;
             utok = 2;
             obrana = 1;
-            rand = new Random();
+            nahodne = new Random();
 
             level = 1;
             xp_k_disp = 0;
             vyhra = false;
 
-            staty[0] = zivot;
-            staty[1] = utok;
-            staty[2] = obrana;
+            atributy[0] = zivot;
+            atributy[1] = utok;
+            atributy[2] = obrana;
 
             hpbar = ziv.bar;
             hpbar.Maximum = zivot;
             hpbar.Value = hpbar.Maximum;
 
-            box_left = b.boxy[0];
-            box_right = b.boxy[1];
-            box_potion = b.boxy[2];
-            box_sword = b.boxy[3];
+            box_vlavo = b.boxy[0];
+            box_vpravo = b.boxy[1];
+            box_elixir = b.boxy[2];
+            box_mec = b.boxy[3];
 
             boxy_akcii = b.boxy;
 
             //ujma = au;
-            show_hp = ziv.show;
+            ukaz_hp = ziv.ukaz;
 
             krok_vpred_t = kroky.timery[0];
             krok_vzad_t = kroky.timery[1];
@@ -69,13 +69,13 @@ namespace WarriorsOfTheBlackFieldForest
             xp_k_disp = 0;
             vyhra = false;
 
-            staty[0] = zivot;
-            staty[1] = utok;
-            staty[2] = obrana;
+            atributy[0] = zivot;
+            atributy[1] = utok;
+            atributy[2] = obrana;
 
             hpbar.Maximum = zivot;
             hpbar.Value = hpbar.Maximum;
-            show_hp.Text = hpbar.Maximum.ToString();
+            ukaz_hp.Text = hpbar.Maximum.ToString();
 
         }
 
@@ -83,8 +83,8 @@ namespace WarriorsOfTheBlackFieldForest
         {
             nastav_poziciu(telo.Location.X, telo.Location.Y);
             hpbar.Visible = true;
-            show_hp.Visible = true;
-            show_hp.Text = hpbar.Value.ToString();
+            ukaz_hp.Visible = true;
+            ukaz_hp.Text = hpbar.Value.ToString();
         }
 
     }
