@@ -140,7 +140,7 @@ namespace WarriorsOfTheBlackFieldForest
                 box_krokvpred = new PictureBox
                 {
                     Size = new Size(50, 50),
-                    Image = Image.FromFile(@"sipka_vpravo.png"),
+                    Image = Properties.Resources.sipka_vpravo,
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Location = new Point(0, 0)
                 };
@@ -151,7 +151,7 @@ namespace WarriorsOfTheBlackFieldForest
                 box_krokvzad = new PictureBox
                 {
                     Size = new Size(50, 50),
-                    Image = Image.FromFile(@"sipka_vlavo.png"),
+                    Image = Properties.Resources.sipka_vlavo,
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Location = new Point(0, 0)
                 };
@@ -162,7 +162,7 @@ namespace WarriorsOfTheBlackFieldForest
                 box_mec = new PictureBox
                 {
                     Size = new Size(50, 50),
-                    Image = Image.FromFile(@"mec.png"),
+                    Image = Properties.Resources.mec,
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Location = new Point(0, 0)
                 };
@@ -173,7 +173,7 @@ namespace WarriorsOfTheBlackFieldForest
                 box_pitie = new PictureBox
                 {
                     Size = new Size(50, 50),
-                    Image = Image.FromFile(@"potion.png"),
+                    Image = Properties.Resources.potion,
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Location = new Point(0, 0)
                 };
@@ -238,7 +238,7 @@ namespace WarriorsOfTheBlackFieldForest
                 Size = new Size(160, 185),
                 Location = new Point(240, 450),
                 SizeMode = PictureBoxSizeMode.StretchImage,
-                Image = Image.FromFile(@"ja-removebg.png"),
+                Image = Properties.Resources.ja_removebg,
                 BackColor = Color.Transparent
             };
             Controls.Add(hrdina.telo);
@@ -252,7 +252,7 @@ namespace WarriorsOfTheBlackFieldForest
                 Size = new Size(160, 185),
                 Location = new Point(600, 450),
                 SizeMode = PictureBoxSizeMode.StretchImage,
-                Image = Image.FromFile(@"bubak1-removebg.png"),
+                Image = Properties.Resources.bubak1_removebg,
                 //Image = padouchovo_telo,
 
                 BackColor = Color.Transparent
@@ -275,7 +275,7 @@ namespace WarriorsOfTheBlackFieldForest
                     Size = new Size(320, 180),
                     Location = new Point(340, 45),
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                    Image = Image.FromFile(@"image.png"),
+                    Image = Properties.Resources.image,
                     BackColor = Color.Transparent
                 };
                 Controls.Add(napis_nad_levelom);
@@ -318,7 +318,7 @@ namespace WarriorsOfTheBlackFieldForest
                     Size = new Size(1000, 700),
 
                     SizeMode = PictureBoxSizeMode.StretchImage,
-                    Image = Image.FromFile(@"gif1.gif"),
+                    Image = Properties.Resources.gif1,
                     Location = new Point(0, 0),
                 };
 
@@ -361,7 +361,7 @@ namespace WarriorsOfTheBlackFieldForest
                 Size = new Size(320, 180),
                 Location = new Point(340, 45),
                 SizeMode = PictureBoxSizeMode.StretchImage,
-                Image = Image.FromFile(@"image.png"),
+                Image = Properties.Resources.image,
                 BackColor = Color.Transparent
             };
             Controls.Add(smrtys);
@@ -468,7 +468,7 @@ namespace WarriorsOfTheBlackFieldForest
             konfety = new PictureBox
             {
                 Size = new Size(1000, 700),
-                Image = Image.FromFile(@"konfety.gif"),
+                Image = Properties.Resources.konfety,
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 BackColor = Color.Transparent,
                 Parent = pozadie
@@ -745,13 +745,13 @@ namespace WarriorsOfTheBlackFieldForest
             hrdina.ukaz_hp.Visible = false;
             hrdina.telo.BringToFront();
             napis_nad_levelom.BringToFront();
-            napis_nad_levelom.Image = Image.FromFile(@"vyhrys.png");
+            napis_nad_levelom.Image = Properties.Resources.vyhrys;
         }
 
         private void koniec_hry()
         {
             napis_nad_levelom.Visible = true;
-            napis_nad_levelom.Image = Image.FromFile(@"smrt.png");
+            napis_nad_levelom.Image = Properties.Resources.smrt;
             tlacitko_new_game.Visible = true;
             napis_nad_levelom.Parent = pozadie;
             napis_nad_levelom.BackColor = Color.Transparent;
