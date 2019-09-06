@@ -26,13 +26,13 @@ Tieto staty si môže hrdina navyšovať po prejdení levelu použitím získan�
      kde a je náhodne 1 alebo -1.
      Ak nie je hrdina dostatočne blízko, akcia je platná, ale žiadnu ujmu nespôsobí.
      
-## Ťah nepriateľa     
-Ťah nepriateľa je náhodne vybratý zo všetkých dostupných akcií (okrem akcie Potion) takto:
- - ak nepriateľ môže zaútočiť na hrdinu, so 75% pravdepodobnosťou zaútočí a s 25% pravdepodobnosťou urobí krok dozadu.
- - ak nepriateľ nemôže zaútočiť na hrdinu, so 40% pravdepodobnosťou urobí krok vpred, so 40% pravdepodobnsťou urobí krok vzad a
- s 20% pravdepodobnosťou zaútočí bez ujmy na živote hrdinu
- - krok nepriateľa je o 33% kratší ako krok hrdinu
- 
+## Ťah nepriateľa    
+Nepriateľ sa správa nasledovne:
+ - ak je nepriateľ vo výhode, útočí. Aby mal výhodu, musí byť splnená aspoň jedna z podmienok:
+  - nepriateľ má vyššie HP ako hrdina,
+  - keby zaútočil nepriateľ na hrdinu 2-krát za sebou rovnakou silou útoku, akú mal pri poslednom útočení, tak by hrdinu zabil.
+ - ak je nepriateľ v nevýhode, vzdaľuje sa od hrdinu. Ak už sa nemôže viac vzdialiť, bezhlavo útočí a dúfa, že sa jeho šance na prežitie časom zvýšia.
+ Výhodu a nevýhodu svojej pozície nepriateľ vyhodnocuje na začiatku každého svojho ťahu.
  
 ## Level Up
 Po každom prejdenom leveli dostane hrdina k dispozícii niekoľko xp, za ktoré má možnosť vylepšiť si staty takto:
