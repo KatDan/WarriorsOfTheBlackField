@@ -301,38 +301,40 @@ namespace WarriorsOfTheBlackFieldForest
         }
 
         //iny mechanizmus pre padoucha
-        public void nahodna_akcia()
+        public void zakerna_akcia()
         {
             //Random rnd = new Random();
 
             if (vzdialenost <= 60)
             {
-                switch (nahodne.Next(0, 4))
+                if (nepriatel.hpbar.Value > hpbar.Value && 2.5 * akt_sila_utoku < nepriatel.hpbar.Value)
                 {
-                    case 0: akcia_krok_dopredu(); break;
-                    default: akcia_utok(); break;
+                    akcia_krok_dozadu();
+                    if (vykonane == false) akcia_utok();
                 }
+                else akcia_utok();
+
             }
             else
             {
-                switch (nahodne.Next(0, 5))
+                if (nepriatel.hpbar.Value > hpbar.Value && 2.5 * akt_sila_utoku < nepriatel.hpbar.Value)
                 {
-                    case 0: akcia_krok_dopredu(); break;
-                    case 1: akcia_krok_dopredu(); break;
-                    case 2: akcia_krok_dozadu(); break;
-                    case 3: akcia_krok_dozadu(); break;
-                    default: akcia_utok(); break;
+                    akcia_krok_dozadu();
+                    if (vykonane == false) akcia_utok();
                 }
+                else akcia_krok_dopredu();
+
             }
-            if (vykonane == false) nahodna_akcia();
+            if (vykonane == false) akcia_utok();
             
         }
 
         public void aktualizuj_atributy()
         {
-            zivot = atributy[0] * 2 + 2;
+            zivot = 2 * level + atributy[0] * 2 + 3;
             if (zivot < 7) zivot = 7;
             utok = atributy[1] % (level + 1) + 1;
+            akt_sila_utoku = utok;
 
             obrana = atributy[2];
 
@@ -353,8 +355,7 @@ namespace WarriorsOfTheBlackFieldForest
             xp_k_disp = lvl_xp_sucet(lev);
             for (int i = 0; i < atributy.Length; i++)
             {
-                atributy[i]
- = 0;
+                atributy[i] = 0;
             }
 
             for (int i = 0; i < 3; i++)
@@ -373,7 +374,7 @@ namespace WarriorsOfTheBlackFieldForest
         public void tah_nepriatela()
         {
             //zmizni_akcie();
-            nepriatel.nahodna_akcia();
+            nepriatel.zakerna_akcia();
             nepriatel.ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
             nepriatel.ukaz_hp.Update();
             //pockej si
