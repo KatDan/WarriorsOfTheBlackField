@@ -32,6 +32,7 @@ Nepriateľ sa správa nasledovne:
   - nepriateľ má vyššie HP ako hrdina,
   - keby zaútočil nepriateľ na hrdinu 2-krát za sebou rovnakou silou útoku, akú mal pri poslednom útočení, tak by hrdinu zabil.
  - ak je nepriateľ v nevýhode, vzdaľuje sa od hrdinu. Ak už sa nemôže viac vzdialiť, bezhlavo útočí a dúfa, že sa jeho šance na prežitie časom zvýšia.
+ 
  Výhodu a nevýhodu svojej pozície nepriateľ vyhodnocuje na začiatku každého svojho ťahu.
  
 ## Level Up
