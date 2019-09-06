@@ -33,11 +33,11 @@ namespace WarriorsOfTheBlackFieldForest
         {
             switch (i)
             {
-                case 1: nazov_levelu.Image = Image.FromFile(@"level1.png"); break;
-                case 2: nazov_levelu.Image = Image.FromFile(@"level2.png"); break;
-                case 3: nazov_levelu.Image = Image.FromFile(@"level3.png"); break;
-                case 4: nazov_levelu.Image = Image.FromFile(@"level4.png"); break;
-                case 5: nazov_levelu.Image = Image.FromFile(@"level5.png"); break;
+                case 1: nazov_levelu.Image = Properties.Resources.level1; break;
+                case 2: nazov_levelu.Image = Properties.Resources.level2; break;
+                case 3: nazov_levelu.Image = Properties.Resources.level3; break;
+                case 4: nazov_levelu.Image = Properties.Resources.level4; break;
+                case 5: nazov_levelu.Image = Properties.Resources.level5; break;
             }
             nazov_levelu.Visible = true;
             nazov_levelu.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -47,15 +47,15 @@ namespace WarriorsOfTheBlackFieldForest
         {
             switch (nahodne.Next(1, 10))
             {
-                case 1: pozadie.Image = Image.FromFile(@"gif1.gif"); break;
-                case 2: pozadie.Image = Image.FromFile(@"gif2.gif"); break;
-                case 3: pozadie.Image = Image.FromFile(@"gif3.gif"); break;
-                case 4: pozadie.Image = Image.FromFile(@"gif4.gif"); break;
-                case 5: pozadie.Image = Image.FromFile(@"gif5.gif"); break;
-                case 6: pozadie.Image = Image.FromFile(@"pozadie1.jpg"); break;
-                case 7: pozadie.Image = Image.FromFile(@"pozadie2.jpg"); break;
-                case 8: pozadie.Image = Image.FromFile(@"pozadie3.jpg"); break;
-                case 9: pozadie.Image = Image.FromFile(@"pozadie4.jpg"); break;
+                case 1: pozadie.Image = Properties.Resources.gif1; break;
+                case 2: pozadie.Image = Properties.Resources.gif2; break;
+                case 3: pozadie.Image = Properties.Resources.gif3; break;
+                case 4: pozadie.Image = Properties.Resources.gif4; break;
+                case 5: pozadie.Image = Properties.Resources.gif5; break;
+                case 6: pozadie.Image = Properties.Resources.pozadie1; break;
+                case 7: pozadie.Image = Properties.Resources.pozadie2; break;
+                case 8: pozadie.Image = Properties.Resources.pozadie3; break;
+                case 9: pozadie.Image = Properties.Resources.pozadie4; break;
             }
 
             pozadie.SizeMode = PictureBoxSizeMode.StretchImage;

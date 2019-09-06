@@ -76,17 +76,17 @@ namespace WarriorsOfTheBlackFieldForest
             Random nahodne = new Random();
             switch (nahodne.Next(1, 12))
             {
-                case 1: telo.Image = Image.FromFile(@"bubak1-removebg.png"); break;
-                case 2: telo.Image = Image.FromFile(@"bubak2-removebg.png"); break;
-                case 3: telo.Image = Image.FromFile(@"bubak3-removebg.png"); break;
-                case 4: telo.Image = Image.FromFile(@"bubak4-removebg.png"); break;
-                case 5: telo.Image = Image.FromFile(@"bubak5-removebg.png"); break;
-                case 6: telo.Image = Image.FromFile(@"bubak6-removebg.png"); break;
-                case 7: telo.Image = Image.FromFile(@"bubak7-removebg.png"); break;
-                case 8: telo.Image = Image.FromFile(@"bubak8-removebg.png"); break;
-                case 9: telo.Image = Image.FromFile(@"bubak9-removebg.png"); break;
-                case 10: telo.Image = Image.FromFile(@"bubak10-removebg.png"); break;
-                case 11: telo.Image = Image.FromFile(@"bubak11-removebg.png"); break;
+                case 1: telo.Image = Properties.Resources.bubak1_removebg; break;
+                case 2: telo.Image = Properties.Resources.bubak2_removebg; break;
+                case 3: telo.Image = Properties.Resources.bubak3_removebg; break;
+                case 4: telo.Image = Properties.Resources.bubak4_removebg; break;
+                case 5: telo.Image = Properties.Resources.bubak5_removebg; break;
+                case 6: telo.Image = Properties.Resources.bubak6_removebg; break;
+                case 7: telo.Image = Properties.Resources.bubak7_removebg; break;
+                case 8: telo.Image = Properties.Resources.bubak8_removebg; break;
+                case 9: telo.Image = Properties.Resources.bubak9_removebg; break;
+                case 10: telo.Image = Properties.Resources.bubak10_removebg; break;
+                case 11: telo.Image = Properties.Resources.bubak11_removebg; break;
             }
 
         }

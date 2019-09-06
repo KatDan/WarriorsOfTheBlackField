@@ -46,7 +46,7 @@ namespace WarriorsOfTheBlackFieldForest
         public void ukaz_sa()
         {
             aktualizuj_veci();
-            text_levelup.Image = Image.FromFile(@"levelupys.png");
+            text_levelup.Image = Properties.Resources.levelupys;
             zvysne_xp.Visible = true;
             moznost1.Visible = true;
             moznost2.Visible = true;
