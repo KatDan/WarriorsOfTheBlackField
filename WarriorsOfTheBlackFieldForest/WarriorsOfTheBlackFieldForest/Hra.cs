@@ -69,7 +69,7 @@ namespace WarriorsOfTheBlackFieldForest
         public Hra()
         {
 
-            sp = new System.Media.SoundPlayer(@"kitkatbeznikolka.wav");
+            sp = new System.Media.SoundPlayer(Properties.Resources.kitkatbeznikolka);
             sp.PlayLooping();
             
             hudba = new Button
