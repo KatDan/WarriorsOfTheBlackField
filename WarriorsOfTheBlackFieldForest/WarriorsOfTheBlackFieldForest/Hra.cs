@@ -110,7 +110,6 @@ namespace WarriorsOfTheBlackFieldForest
                 hrdina_timer_krok_vpred = new Timer();
                 hrdina_timer_krok_vpred.Interval = 10;
                 hrdina_timer_krok_vpred.Tick += new EventHandler(hrdina_timer_krok_vpred_Tick);
-                //Controls.Add(hrdina_timer_krok_vpred);
 
                 hrdina_timer_krok_vzad = new Timer();
                 hrdina_timer_krok_vzad.Interval = 10;
@@ -253,8 +252,6 @@ namespace WarriorsOfTheBlackFieldForest
                 Location = new Point(600, 450),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = Properties.Resources.bubak1_removebg,
-                //Image = padouchovo_telo,
-
                 BackColor = Color.Transparent
             };
             Controls.Add(padouch.telo);
@@ -301,7 +298,6 @@ namespace WarriorsOfTheBlackFieldForest
                 };
                 Controls.Add(tlacitko_how_to_play);
                 tlacitko_how_to_play.Click += new EventHandler(this.tlacitko_how_to_play_Click);
-                //button_VysokeSkore.Click += new EventHandler(this.button_VysokeSkore_Click);
 
                 tlacitko_kredity = new Button
                 {
@@ -378,7 +374,7 @@ namespace WarriorsOfTheBlackFieldForest
             };
             Controls.Add(zvysne_xp);
 
-            //options
+            //moznosti
             {
                 moznost_1 = new Button
                 {
@@ -419,7 +415,7 @@ namespace WarriorsOfTheBlackFieldForest
             }
             moznosti = new Moznosti(moznost_1, moznost_2, moznost_3, moznost_4);
 
-            //staty
+            //atributy
             {
                 atribut_1 = new Label
                 {
@@ -514,8 +510,6 @@ namespace WarriorsOfTheBlackFieldForest
         internal Moznosti moznosti;
         internal Atributy atributky;
 
-
-        //deklaracie
         internal Hrdina hrdina;
         internal ProgressBar hp_hrdina;
 
@@ -625,13 +619,12 @@ namespace WarriorsOfTheBlackFieldForest
 
         private void box_mec_Click(object sender, EventArgs e)
         {
-            //spatny_utok.Start();
             hrdina.akcia_utok();
 
             hrdina.hpbar.Update();
             hrdina.ukaz_hp.Update();
             
-            if (hrdina.vyhra == true) { if (hrdina.level > 5) vyhral_si(); else { Console.WriteLine(hrdina.level); hrdina.zmizni_akcie(); levelup.ukaz_sa(); aktualizuj_levelup(hrdina.level); } }
+            if (hrdina.vyhra == true) { if (hrdina.level > 5) vyhral_si(); else { hrdina.zmizni_akcie(); levelup.ukaz_sa(); aktualizuj_levelup(hrdina.level); } }
             else rozhyb_padoucha();
         }
 
@@ -852,10 +845,8 @@ namespace WarriorsOfTheBlackFieldForest
 
         private void dopredny_utok_Tick(object sender, EventArgs e)
         {
-            //Console.WriteLine("tik");
             if (hrdina.telo.Location.X < hrdina.ciel_poz_x)
             {
-                //Console.WriteLine("utok");
                 hrdina.prebieha = true;
                 hrdina.telo.Location = new Point(hrdina.telo.Location.X + 1, hrdina.telo.Location.Y);
             }

@@ -24,7 +24,7 @@ namespace WarriorsOfTheBlackFieldForest
             this.pozadie = pozadiee;
             nazov_levelu = nazov;
             nahodne = new Random();
-            //nepriatel
+
             this.padouch = padouch;
             padouch.vygeneruj_nepriatela(uroven);
         }

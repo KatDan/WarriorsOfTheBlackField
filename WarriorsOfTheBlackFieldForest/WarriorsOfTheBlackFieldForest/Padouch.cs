@@ -17,9 +17,7 @@ namespace WarriorsOfTheBlackFieldForest
             hpbar = ziv.bar;
             
             level = hrdina.level;
-            //hpbar.Maximum = hrdina.level * 10;
             hpbar.Value = hpbar.Maximum;
-            //ujma = jau;
             nepriatel = hrdina;
             ukaz_hp = ziv.ukaz;
             vyhra = false;
@@ -28,8 +26,6 @@ namespace WarriorsOfTheBlackFieldForest
             krok_vpred_t = krok.timery[0];
             krok_vzad_t = krok.timery[1];
             utok_pohyb = krok.timery[2];
-
-            //this.rand = new Random();
 
             aktualizuj_atributy();
         }
@@ -49,7 +45,6 @@ namespace WarriorsOfTheBlackFieldForest
 
             for (int i = 0; i < 20; i++)
             {
-                //Console.WriteLine("utok vpred");
                 System.Threading.Thread.Sleep(10);
                 telo.Location = new Point(telo.Location.X - 1, telo.Location.Y);
                 telo.Update();
@@ -57,7 +52,6 @@ namespace WarriorsOfTheBlackFieldForest
             System.Threading.Thread.Sleep(10);
             for (int i = 0; i < 20; i++)
             {
-                //Console.WriteLine("utok vzad");
                 System.Threading.Thread.Sleep(10);
                 telo.Location = new Point(telo.Location.X + 1, telo.Location.Y);
                 telo.Update();
@@ -101,8 +95,6 @@ namespace WarriorsOfTheBlackFieldForest
 
                 ciel_poz_x = telo.Location.X - 40;
                 krok_vpred_t.Start();
-                //nastav_poziciu(telo.Location.X - 40, telo.Location.Y);
-                //Console.WriteLine("krok dopredu");
                 vykonane = true;
             }
             else vykonane = false;
@@ -119,8 +111,6 @@ namespace WarriorsOfTheBlackFieldForest
 
                 ciel_poz_x = telo.Location.X + 40;
                 krok_vzad_t.Start();
-                //nastav_poziciu(telo.Location.X + 40, telo.Location.Y);
-                //Console.WriteLine("krok dozadu");
                 vykonane = true;
             }
             else vykonane = false;

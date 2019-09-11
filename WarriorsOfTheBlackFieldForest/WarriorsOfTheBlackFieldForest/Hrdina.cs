@@ -45,7 +45,6 @@ namespace WarriorsOfTheBlackFieldForest
 
             boxy_akcii = b.boxy;
 
-            //ujma = au;
             ukaz_hp = ziv.ukaz;
 
             krok_vpred_t = kroky.timery[0];

@@ -76,7 +76,6 @@ namespace WarriorsOfTheBlackFieldForest
             moznost2.Visible = false;
             moznost3.Visible = false;
             moznost4.Visible = false;
-            //hrdina.telo.Visible = false;
             atribut1.Visible = false;
             atribut2.Visible = false;
             atribut3.Visible = false;

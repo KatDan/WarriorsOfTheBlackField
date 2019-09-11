@@ -85,9 +85,7 @@ namespace WarriorsOfTheBlackFieldForest
         internal int[] atributy = new int[3];
 
         internal int akt_sila_utoku;
-
-        //rand = new Random();
-
+        
         //metody
 
         public int lvl_xp_sucet(int l)
@@ -126,7 +124,6 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void sila_utoku()
         {
-            //Random rnd = new Random();
             int a = nahodne.Next(0, 2);
             if (a == 1) a = -1;
             else a = 1;
@@ -142,7 +139,6 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void bran_sa()
         {
-            //Random rand = new Random();
             nepriatel.akt_sila_utoku -= (nahodne.Next(0, 51) / 40) * obrana;
         }
 
@@ -163,7 +159,6 @@ namespace WarriorsOfTheBlackFieldForest
                 telo.Location = new Point(telo.Location.X, telo.Location.Y - 1);
                 telo.Update();
             }
-            //odmizni_akcie();
             hpbar.Visible = true;
             ukaz_hp.Visible = true;
             vykonane = true;
@@ -192,8 +187,6 @@ namespace WarriorsOfTheBlackFieldForest
                 nepriatel.bran_sa();
                 utoc();
                 nepriatel.ukaz_hp.Update();
-                //urob_utocny_pohyb();
-                //zobraz_ujmu();
                 vykonane = true;
                 animacia_utoku();
                 nepriatel.ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
@@ -205,7 +198,6 @@ namespace WarriorsOfTheBlackFieldForest
                 zisti_ci_som_vyhral();
             }
             else { animacia_utoku(); vykonane = true; }
-            //else { vykonane = false; urob_pohyb_neschopnosti(); }
         }
 
         public void akcia_napi_sa(int o_kolko)
@@ -224,11 +216,9 @@ namespace WarriorsOfTheBlackFieldForest
                 nepriatel.vzdialenost -= 60;
                 ciel_poz_x = telo.Location.X + 60;
                 krok_vpred_t.Start();
-                //nastav_poziciu(telo.Location.X + 60, telo.Location.Y);
                 vykonane = true;
             }
             else urob_pohyb_neschopnosti();
-            //else vykonane = false;
 
         }
 
@@ -241,10 +231,8 @@ namespace WarriorsOfTheBlackFieldForest
                 nepriatel.vzdialenost += 60;
                 ciel_poz_x = telo.Location.X - 60;
                 krok_vzad_t.Start();
-                //nastav_poziciu(telo.Location.X - 60, telo.Location.Y);
                 vykonane = true;
             }
-            //else vykonane = false;
             else urob_pohyb_neschopnosti();
         }
 
@@ -300,11 +288,9 @@ namespace WarriorsOfTheBlackFieldForest
             }
         }
 
-        //iny mechanizmus pre padoucha
+        //mechanizmus pre padoucha
         public void zakerna_akcia()
         {
-            //Random rnd = new Random();
-
             if (vzdialenost <= 60)
             {
                 if (nepriatel.hpbar.Value > hpbar.Value && 2.5 * akt_sila_utoku < nepriatel.hpbar.Value)
@@ -351,7 +337,6 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void vygeneruj_nepriatela(int lev)
         {
-            //Random rnd = new Random();
             xp_k_disp = lvl_xp_sucet(lev);
             for (int i = 0; i < atributy.Length; i++)
             {
@@ -373,12 +358,9 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void tah_nepriatela()
         {
-            //zmizni_akcie();
             nepriatel.zakerna_akcia();
             nepriatel.ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
             nepriatel.ukaz_hp.Update();
-            //pockej si
-            //odmizni_akcie();
         }
 
         public virtual void animacia_utoku()
@@ -386,7 +368,6 @@ namespace WarriorsOfTheBlackFieldForest
 
             for (int i = 0; i < 20; i++)
             {
-                //Console.WriteLine("utok vpred");
                 System.Threading.Thread.Sleep(10);
 
                 telo.Location = new Point(telo.Location.X + 1, telo.Location.Y);
@@ -396,7 +377,6 @@ namespace WarriorsOfTheBlackFieldForest
             System.Threading.Thread.Sleep(10);
             for (int i = 0; i < 20; i++)
             {
-                //Console.WriteLine("utok vzad");
                 System.Threading.Thread.Sleep(10);
                 telo.Location = new Point(telo.Location.X - 1, telo.Location.Y);
                 telo.Update();
