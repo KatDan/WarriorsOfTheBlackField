@@ -10,6 +10,8 @@ namespace WarriorsOfTheBlackFieldForest
 {
     public class Padouch : Postava
     {
+        internal Image[] ksichty;
+
         public Padouch(Hrdina hrdina, Hra.Zivot ziv, Hra.TimerKrok krok)
         {
             //nastavi vhodnu obtiaznost
@@ -28,6 +30,21 @@ namespace WarriorsOfTheBlackFieldForest
             utok_pohyb = krok.timery[2];
 
             aktualizuj_atributy();
+
+            ksichty = new Image[]
+            {
+                Properties.Resources.bubak1_removebg,
+                Properties.Resources.bubak2_removebg,
+                Properties.Resources.bubak3_removebg,
+                Properties.Resources.bubak4_removebg,
+                Properties.Resources.bubak5_removebg,
+                Properties.Resources.bubak6_removebg,
+                Properties.Resources.bubak7_removebg,
+                Properties.Resources.bubak8_removebg,
+                Properties.Resources.bubak9_removebg,
+                Properties.Resources.bubak10_removebg,
+                Properties.Resources.bubak11_removebg
+            };
         }
 
 
@@ -68,21 +85,8 @@ namespace WarriorsOfTheBlackFieldForest
         public void vygeneruj_telo()
         {
             Random nahodne = new Random();
-            switch (nahodne.Next(1, 12))
-            {
-                case 1: telo.Image = Properties.Resources.bubak1_removebg; break;
-                case 2: telo.Image = Properties.Resources.bubak2_removebg; break;
-                case 3: telo.Image = Properties.Resources.bubak3_removebg; break;
-                case 4: telo.Image = Properties.Resources.bubak4_removebg; break;
-                case 5: telo.Image = Properties.Resources.bubak5_removebg; break;
-                case 6: telo.Image = Properties.Resources.bubak6_removebg; break;
-                case 7: telo.Image = Properties.Resources.bubak7_removebg; break;
-                case 8: telo.Image = Properties.Resources.bubak8_removebg; break;
-                case 9: telo.Image = Properties.Resources.bubak9_removebg; break;
-                case 10: telo.Image = Properties.Resources.bubak10_removebg; break;
-                case 11: telo.Image = Properties.Resources.bubak11_removebg; break;
-            }
-
+            telo.Image = ksichty[nahodne.Next(0, 11)];
+            
         }
 
         public override void akcia_krok_dopredu()

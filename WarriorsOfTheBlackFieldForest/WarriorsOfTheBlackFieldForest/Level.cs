@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
+
 namespace WarriorsOfTheBlackFieldForest
 {
     public class Level
@@ -16,6 +17,8 @@ namespace WarriorsOfTheBlackFieldForest
         internal int obtiaznost;
         internal PictureBox nazov_levelu;
         internal Random nahodne;
+        internal Image[] pozadia;
+        internal Image[] cislo_levelu;
 
         public Level(int uroven, Hrdina hhrdina, Padouch padouch, PictureBox pozadiee, PictureBox nazov)
         {
@@ -27,37 +30,42 @@ namespace WarriorsOfTheBlackFieldForest
 
             this.padouch = padouch;
             padouch.vygeneruj_nepriatela(uroven);
+
+            pozadia = new Image[] {
+                Properties.Resources.gif1 ,
+                Properties.Resources.gif2,
+                Properties.Resources.gif3,
+                Properties.Resources.gif4,
+                Properties.Resources.gif5,
+                Properties.Resources.pozadie1,
+                Properties.Resources.pozadie2,
+                Properties.Resources.pozadie3,
+                Properties.Resources.pozadie4
+            };
+
+            cislo_levelu = new Image[]
+            {
+                Properties.Resources.level1,
+                Properties.Resources.level2,
+                Properties.Resources.level3,
+                Properties.Resources.level4,
+                Properties.Resources.level5
+            };
+
         }
 
         public void nastav_nazov(int i)
         {
-            switch (i)
-            {
-                case 1: nazov_levelu.Image = Properties.Resources.level1; break;
-                case 2: nazov_levelu.Image = Properties.Resources.level2; break;
-                case 3: nazov_levelu.Image = Properties.Resources.level3; break;
-                case 4: nazov_levelu.Image = Properties.Resources.level4; break;
-                case 5: nazov_levelu.Image = Properties.Resources.level5; break;
-            }
+            nazov_levelu.Image = cislo_levelu[i-1];
+            
             nazov_levelu.Visible = true;
             nazov_levelu.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         public void vygeneruj_pozadie()
         {
-            switch (nahodne.Next(1, 10))
-            {
-                case 1: pozadie.Image = Properties.Resources.gif1; break;
-                case 2: pozadie.Image = Properties.Resources.gif2; break;
-                case 3: pozadie.Image = Properties.Resources.gif3; break;
-                case 4: pozadie.Image = Properties.Resources.gif4; break;
-                case 5: pozadie.Image = Properties.Resources.gif5; break;
-                case 6: pozadie.Image = Properties.Resources.pozadie1; break;
-                case 7: pozadie.Image = Properties.Resources.pozadie2; break;
-                case 8: pozadie.Image = Properties.Resources.pozadie3; break;
-                case 9: pozadie.Image = Properties.Resources.pozadie4; break;
-            }
-
+            pozadie.Image = pozadia[nahodne.Next(0, 9)];
+            
             pozadie.SizeMode = PictureBoxSizeMode.StretchImage;
             pozadie.SendToBack();
         }
@@ -73,7 +81,6 @@ namespace WarriorsOfTheBlackFieldForest
             padouch.vygeneruj_telo();
             hrdina.ukaz_sa();
             padouch.ukaz_sa();
-            //hrdina.zmizni_akcie();
             hrdina.nepriatel = padouch;
             hrdina.zisti_vzdialenost();
             hrdina.hpbar.Value = hrdina.hpbar.Maximum;
