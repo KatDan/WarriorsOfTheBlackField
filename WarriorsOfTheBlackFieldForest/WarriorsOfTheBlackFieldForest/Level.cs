@@ -16,16 +16,17 @@ namespace WarriorsOfTheBlackFieldForest
         internal Padouch padouch;
         internal int obtiaznost;
         internal PictureBox nazov_levelu;
+        internal Label cislo_levelu;
         internal Random nahodne;
         internal Image[] pozadia;
-        internal Image[] cislo_levelu;
+        //internal Image[] cislo_levelu;
 
-        public Level(int uroven, Hrdina hhrdina, Padouch padouch, PictureBox pozadiee, PictureBox nazov)
+        public Level(int uroven, Hrdina hhrdina, Padouch padouch, PictureBox pozadiee, Label nazov)
         {
             obtiaznost = uroven;
             this.hrdina = hhrdina;
             this.pozadie = pozadiee;
-            nazov_levelu = nazov;
+            cislo_levelu = nazov;
             nahodne = new Random();
 
             this.padouch = padouch;
@@ -43,23 +44,26 @@ namespace WarriorsOfTheBlackFieldForest
                 Properties.Resources.pozadie4
             };
 
-            cislo_levelu = new Image[]
+            /*cislo_levelu = new Image[]
             {
                 Properties.Resources.level1,
                 Properties.Resources.level2,
                 Properties.Resources.level3,
                 Properties.Resources.level4,
                 Properties.Resources.level5
-            };
+            };*/
 
         }
 
         public void nastav_nazov(int i)
         {
-            nazov_levelu.Image = cislo_levelu[i-1];
-            
-            nazov_levelu.Visible = true;
-            nazov_levelu.SizeMode = PictureBoxSizeMode.StretchImage;
+            //nazov_levelu.Image = cislo_levelu[i-1];
+            cislo_levelu.Visible = true;
+            cislo_levelu.Text = "Level "+i;
+            cislo_levelu.BringToFront();
+
+            //nazov_levelu.Visible = true;
+            //nazov_levelu.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         public void vygeneruj_pozadie()
@@ -87,9 +91,15 @@ namespace WarriorsOfTheBlackFieldForest
             hrdina.ukaz_hp.Text = hrdina.max_zivot.ToString();
             padouch.hpbar.Maximum = padouch.max_zivot;
 
+            hrdina.ukaz_hp.BringToFront();
+            hrdina.hpbar.BringToFront();
+            padouch.ukaz_hp.BringToFront();
+            padouch.hpbar.BringToFront();
+
             padouch.hpbar.Value = padouch.max_zivot;
             padouch.vyhra = false;
             hrdina.vyhra = false;
+            cislo_levelu.Visible = true;
         }
     }
 }

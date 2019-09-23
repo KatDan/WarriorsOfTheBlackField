@@ -93,8 +93,10 @@ namespace WarriorsOfTheBlackFieldForest
             int pom = 0;
             for (int i = 0; i < l; i++)
             {
-                pom += xp[i];
+                if (i < xp.Length) pom += xp[i];
+                else pom += xp[xp.Length % i];
             }
+
             return pom;
         }
 
@@ -183,7 +185,7 @@ namespace WarriorsOfTheBlackFieldForest
             vykonane = false;
             if (zisti_ci_mozes_utocit() == true)
             {
-                sila_utoku();
+                sila_utoku(); 
                 nepriatel.bran_sa();
                 utoc();
                 nepriatel.ukaz_hp.Update();
@@ -317,12 +319,15 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void aktualizuj_atributy()
         {
-            zivot = 2 * level + atributy[0] * 2 + 3;
+            //zivot = 2 * level + atributy[0] * 2 + 3;
+            zivot = 5 + atributy[0] * nahodne.Next(2, 8);
             if (zivot < 7) zivot = 7;
-            utok = atributy[1] % (level + 1) + 1;
+            //utok = atributy[1] % (level + 1) + 1;
+            utok = 1 + atributy[1] * nahodne.Next(1, 4);
+
             akt_sila_utoku = utok;
 
-            obrana = atributy[2];
+            obrana = 1 + atributy[2]*nahodne.Next(1,3);
 
             max_zivot = zivot;
             hpbar.Maximum = zivot;
@@ -330,14 +335,11 @@ namespace WarriorsOfTheBlackFieldForest
             hpbar.Update();
             ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
             ukaz_hp.Update();
-            
-
-
         }
 
         public void vygeneruj_nepriatela(int lev)
         {
-            xp_k_disp = lvl_xp_sucet(lev);
+            xp_k_disp = lvl_xp_sucet(lev) - 1;
             for (int i = 0; i < atributy.Length; i++)
             {
                 atributy[i] = 0;
@@ -358,6 +360,8 @@ namespace WarriorsOfTheBlackFieldForest
 
         public void tah_nepriatela()
         {
+            nepriatel.ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
+            nepriatel.ukaz_hp.Update();
             nepriatel.zakerna_akcia();
             nepriatel.ukaz_hp.Text = nepriatel.hpbar.Value.ToString();
             nepriatel.ukaz_hp.Update();

@@ -2,7 +2,7 @@
 ###### zápočtový program, zimný semester, šk. rok 2018/2019
 <br/>
  
-Cieľom hry je v 5tich, stále náročnejších leveloch poraziť nepriateľa. 
+Cieľom hry je poraziť čo najviac nepriateľov, ktorých sila a diabolskosť každým levelom rastie.  
 
 ## Staty
 Hrdina má nasledovné staty:
@@ -46,6 +46,7 @@ Po vyčerpaní všetkých xp, ktoré mal hrdina k dispozícii, hrdina prechádza
 Staty nepriateľa sú náhodne generované použitím všetkých xp, ktoré by mal hrdina v danom leveli dokopy k dispozícii.
 
 <br/>
-Po smrti hrdinu začína hrdina znovu na leveli 1 s defaultnými statmi.
+Po smrti hrdinu si hrdina môže uložiť nahraté skóre a hrať odznova od levelu 1 s defaultnými atribútmi. 
+
 <br/>
-Po prejdení všetkých 5 levelov je User povinný užiť si konfety a je mu dovolené ukončiť program.
+Userovi je dovolené ukončiť program až vtedy, keď bude spokojný s tým, ako vyzerá tabuľka High score. Žiadne konfety.

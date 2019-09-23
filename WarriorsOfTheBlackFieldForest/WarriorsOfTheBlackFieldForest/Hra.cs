@@ -66,6 +66,18 @@ namespace WarriorsOfTheBlackFieldForest
             }
         }
 
+        public struct Hrac
+        {
+            internal string meno;
+            internal int body;
+
+            public Hrac(string m, int b)
+            {
+                meno = m;
+                body = b;
+            }
+        }
+
         public Hra()
         {
 
@@ -89,7 +101,7 @@ namespace WarriorsOfTheBlackFieldForest
                 Text = "HOW TO PLAY:\n" +
                 "==================\n" +
                 "You went camping to the Black Field forest with your friends and while you were on a walk, they ate all Horalky you had. Naturally, you got really angry.\n" +
-                "Your task is to defeat 5 of your 'friends'. Each turn you have 4 options:\n" +
+                "Your task is to defeat as many evil Horalky-eaters as you can. Each turn you have 4 options:\n" +
                 "# move forwards\n" +
                 "# move backwards\n" +
                 "# drink a magical potion - A shot of borovička restores you 5HP. At start, you have 0 shots of borovička.\n" +
@@ -235,7 +247,7 @@ namespace WarriorsOfTheBlackFieldForest
             {
                 Parent = pozadie,
                 Size = new Size(160, 185),
-                Location = new Point(240, 450),
+                Location = new Point(190, 450),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = Properties.Resources.ja_removebg,
                 BackColor = Color.Transparent
@@ -249,7 +261,7 @@ namespace WarriorsOfTheBlackFieldForest
             {
                 Parent = pozadie,
                 Size = new Size(160, 185),
-                Location = new Point(600, 450),
+                Location = new Point(650, 450),
                 SizeMode = PictureBoxSizeMode.StretchImage,
                 Image = Properties.Resources.bubak1_removebg,
                 BackColor = Color.Transparent
@@ -266,7 +278,7 @@ namespace WarriorsOfTheBlackFieldForest
 
             //uvodne menu
             {
-                napis_nad_levelom = new PictureBox
+                napis_nad_menu = new PictureBox
                 {
                     Parent = pozadie,
                     Size = new Size(320, 180),
@@ -275,13 +287,13 @@ namespace WarriorsOfTheBlackFieldForest
                     Image = Properties.Resources.image,
                     BackColor = Color.Transparent
                 };
-                Controls.Add(napis_nad_levelom);
+                Controls.Add(napis_nad_menu);
 
                 tlacitko_new_game = new Button
                 {
 
                     Size = new Size(300, 60),
-                    Location = new Point(350, 268),
+                    Location = new Point(350, 270),
                     Text = "New Game",
                     Font = new System.Drawing.Font("Carta Magna Line", 16F)
 
@@ -292,17 +304,27 @@ namespace WarriorsOfTheBlackFieldForest
                 tlacitko_how_to_play = new Button
                 {
                     Size = new Size(300, 60),
-                    Location = new Point(350, 341),
+                    Location = new Point(350, 340),
                     Text = "How to play",
                     Font = new System.Drawing.Font("Carta Magna Line", 16F)
                 };
                 Controls.Add(tlacitko_how_to_play);
                 tlacitko_how_to_play.Click += new EventHandler(this.tlacitko_how_to_play_Click);
 
+                tlacitko_skore = new Button
+                {
+                    Size = new Size(300, 60),
+                    Location = new Point(350, 410),
+                    Text = "High score",
+                    Font = new System.Drawing.Font("Carta Magna Line", 16F)
+                };
+                Controls.Add(tlacitko_skore);
+                tlacitko_skore.Click += new EventHandler(tlacitko_skore_Click);
+
                 tlacitko_kredity = new Button
                 {
                     Size = new Size(300, 60),
-                    Location = new Point(350, 414),
+                    Location = new Point(350, 480),
                     Text = "Credits",
                     Font = new System.Drawing.Font("Carta Magna Line", 16F)
                 };
@@ -335,12 +357,10 @@ namespace WarriorsOfTheBlackFieldForest
                 
 
             }
-            menu = new HlavneMenu(this.napis_nad_levelom, this.tlacitko_new_game, this.tlacitko_how_to_play, this.tlacitko_kredity, this.pozadie_menu);
-
-            level = new Level(1, hrdina, padouch, pozadie, napis_nad_levelom);
+            menu = new HlavneMenu(napis_nad_menu, tlacitko_new_game, tlacitko_how_to_play,tlacitko_skore, tlacitko_kredity, pozadie_menu, textBox_zadaj_meno, tlacitko_submit);
 
             padouch.telo.Parent = pozadie;
-            napis_nad_levelom.Parent = pozadie;
+            napis_nad_menu.Parent = pozadie;
             hrdina.telo.Parent = pozadie;
 
             box_krokvzad.SendToBack();
@@ -349,6 +369,22 @@ namespace WarriorsOfTheBlackFieldForest
             box_pitie.SendToBack();
             hp_hrdina.SendToBack();
             hp_padouch.SendToBack();
+
+            level_label = new Label
+            {
+                Parent = pozadie,
+                BackColor = Color.Transparent,
+                Size = new Size(pozadie.Width,60),
+                Text = "Level 1",
+                Location = new Point(0,150),
+                Visible = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Imprint MT Shadow", 24),
+
+            };
+            Controls.Add(level_label);
+
+            level = new Level(1, hrdina, padouch, pozadie, level_label);
 
             //levelup
             smrtys = new PictureBox
@@ -456,12 +492,12 @@ namespace WarriorsOfTheBlackFieldForest
             }
             atributky = new Atributy(atribut_1, atribut_2, atribut_3, atribut_4);
 
-            levelup = new LevelUp(zvysne_xp, moznosti, hrdina, atributky, pozadie, napis_nad_levelom);
+            levelup = new LevelUp(zvysne_xp, moznosti, hrdina, atributky, pozadie, napis_nad_menu);
             levelup.zmizni();
 
             levelup.text_levelup.Parent = levelup.pozadie;
 
-            konfety = new PictureBox
+            /*konfety = new PictureBox
             {
                 Size = new Size(1000, 700),
                 Image = Properties.Resources.konfety,
@@ -470,7 +506,7 @@ namespace WarriorsOfTheBlackFieldForest
                 Parent = pozadie
             };
             konfety.SendToBack();
-            konfety.Visible = false;
+            konfety.Visible = false;*/
 
             nahodne = new Random();
 
@@ -484,35 +520,43 @@ namespace WarriorsOfTheBlackFieldForest
                 Visible = false
             };
             Controls.Add(x_credits);
-            x_credits.BringToFront();
-            
+            x_credits.BringToFront();            
             x_credits.Click += new EventHandler(x_credits_click);
+
+            x_skore.Click += new EventHandler(x_skore_Click);
+
+            rebricek = new List<Hrac>();
+
+            skore_meno_napis.Font = new Font("Imprint MT Shadow",15);
+            panel_cisla.Font = new Font("Imprint MT Shadow", 15);
+            skore_hodnota_napis.Font = new Font("Imprint MT Shadow", 15);
+            tlacitko_submit.Font = new Font("Imprint MT Shadow", 10);
+            tlacitko_hlavne_menu.Font = new Font("Imprint MT Shadow", 10);
         }
 
+        //timery
         internal Timer hrdina_timer_krok_vpred;
         internal Timer hrdina_timer_krok_vzad;
         internal Timer padouch_timer_krok_vpred;
         internal Timer padouch_timer_krok_vzad;
-
         internal Timer dopredny_utok;
         internal Timer spatny_utok;
+
+        //hudba
         internal Button hudba;
+        internal System.Media.SoundPlayer sp;
 
         internal int i;
-        internal Button x_how_to_play;
-        internal Button x_credits;
+        internal int pom;
 
-        internal Boxy boxy_akcii;
-        internal TimerKrok krok_hrdina;
-        internal TimerKrok krok_padouch;
-        internal Zivot hrdina_zivot;
-        internal Zivot padouch_zivot;
-        internal Moznosti moznosti;
-        internal Atributy atributky;
-
+        //postavy
         internal Hrdina hrdina;
         internal ProgressBar hp_hrdina;
 
+        internal Zivot hrdina_zivot;
+        internal Zivot padouch_zivot;
+
+        internal Boxy boxy_akcii;
         internal PictureBox box_krokvpred;
         internal PictureBox box_krokvzad;
         internal PictureBox box_mec;
@@ -520,19 +564,30 @@ namespace WarriorsOfTheBlackFieldForest
 
         internal Label ukaz_hp_hrdina;
         internal Random nahodne;
-        internal System.Media.SoundPlayer sp;
-
         internal Padouch padouch;
         internal ProgressBar hp_padouch;
         internal Label ukaz_hp_padouch;
 
-        internal HlavneMenu menu;
-        internal Level level;
-        internal PictureBox pozadie;
-        internal PictureBox napis_nad_levelom;
-        internal PictureBox smrtys;
-        internal PictureBox konfety;
+        internal TimerKrok krok_hrdina;
+        internal TimerKrok krok_padouch;
 
+        internal List<Hrac> rebricek;
+
+        //menu
+        internal HlavneMenu menu;
+        internal PictureBox napis_nad_menu;
+        internal PictureBox pozadie;
+        internal Label text_ku_how_to_play;
+        internal Button x_how_to_play;
+        internal Button x_credits;
+
+        //level
+        internal Level level;
+        internal Label level_label;
+        internal PictureBox smrtys;
+        //internal PictureBox konfety;
+
+        //levelup
         internal LevelUp levelup;
         internal Label zvysne_xp;
         internal Button moznost_1;
@@ -543,7 +598,8 @@ namespace WarriorsOfTheBlackFieldForest
         internal Label atribut_2;
         internal Label atribut_3;
         internal Label atribut_4;
-        internal Label text_ku_how_to_play;       
+        internal Moznosti moznosti;
+        internal Atributy atributky;
 
         private void tlacitko_kredity_Click(object sender, EventArgs e)
         {
@@ -566,7 +622,7 @@ namespace WarriorsOfTheBlackFieldForest
             tlacitko_how_to_play.Visible = true;
             tlacitko_kredity.BringToFront();
             tlacitko_kredity.Visible = true;
-            napis_nad_levelom.BringToFront();
+            napis_nad_menu.BringToFront();
         }
 
         private void tlacitko_how_to_play_Click(object sender, EventArgs e)
@@ -574,14 +630,24 @@ namespace WarriorsOfTheBlackFieldForest
             tlacitko_how_to_play.Visible = false;
             tlacitko_kredity.Visible = false;
             text_ku_how_to_play.Visible = true;
+            text_ku_how_to_play.BringToFront();
             titulky.Visible = false;
             x_how_to_play.Visible = true;
             x_how_to_play.BringToFront();
         }
 
+        private void tlacitko_skore_Click(object sender, EventArgs e)
+        {
+            panel_skore.Visible = true;
+            panel_skore.BringToFront();
+            x_skore.Visible = true;
+            x_skore.BringToFront();
+        }
+
         private void tlacitko_nova_hra_Click(object sender, EventArgs e)
         {
             text_ku_how_to_play.Visible = false;
+            tlacitko_hlavne_menu.Visible = false;
             titulky.Visible = false;
             menu.zmizni_menu();
             level.nastav_nazov(1);
@@ -593,6 +659,8 @@ namespace WarriorsOfTheBlackFieldForest
             level.hrdina.vytvor_zakladneho_hrdinu();
             level.padouch.vygeneruj_nepriatela(1);
             level.padouch.vygeneruj_telo();
+            level.hrdina.ukaz_sa();
+            level.padouch.ukaz_sa();
             level.padouch.hpbar.Value = level.padouch.hpbar.Maximum;
             tlacitko_new_game.Visible = false;
             level.padouch.vyhra = false;
@@ -624,7 +692,15 @@ namespace WarriorsOfTheBlackFieldForest
             hrdina.hpbar.Update();
             hrdina.ukaz_hp.Update();
             
-            if (hrdina.vyhra == true) { if (hrdina.level > 5) vyhral_si(); else { hrdina.zmizni_akcie(); levelup.ukaz_sa(); aktualizuj_levelup(hrdina.level); } }
+            if (hrdina.vyhra == true) {
+                //if (hrdina.level > 5) vyhral_si();
+                {
+                    hrdina.zmizni_akcie();
+                    level_label.Visible = false;
+                    levelup.ukaz_sa();
+                    aktualizuj_levelup(hrdina.level);
+                }
+            }
             else rozhyb_padoucha();
         }
 
@@ -657,6 +733,7 @@ namespace WarriorsOfTheBlackFieldForest
             {
                 levelup.zmizni();
                 level.nastav_nazov(hrdina.level);
+                levelup.text_levelup.Visible = false;
                 level.zrob_novy_level();
             }
         }
@@ -672,6 +749,7 @@ namespace WarriorsOfTheBlackFieldForest
             if (levelup.xp_teraz == 0)
             {
                 levelup.zmizni();
+                levelup.text_levelup.Visible = false;
                 level.zrob_novy_level();
             }
         }
@@ -688,6 +766,7 @@ namespace WarriorsOfTheBlackFieldForest
             if (levelup.xp_teraz == 0)
             {
                 levelup.zmizni();
+                levelup.text_levelup.Visible = false;
                 level.zrob_novy_level();
             }
         }
@@ -703,6 +782,7 @@ namespace WarriorsOfTheBlackFieldForest
             if (levelup.xp_teraz == 0)
             {
                 levelup.zmizni();
+                levelup.text_levelup.Visible = false;
                 level.zrob_novy_level();
             }
         }
@@ -711,8 +791,9 @@ namespace WarriorsOfTheBlackFieldForest
         {
             if (hrdina.vyhra == true)
             {
-                if (hrdina.level < 5) levelup.ukaz_sa();
-                else vyhral_si();
+                levelup.ukaz_sa();
+                /*if (hrdina.level < 5) levelup.ukaz_sa();
+                else vyhral_si();*/
             }
             else
             {
@@ -726,7 +807,7 @@ namespace WarriorsOfTheBlackFieldForest
             }
         }
 
-        private void vyhral_si()
+        /*private void vyhral_si()
         {
             hrdina.nepriatel.telo.Visible = false;
             hrdina.nepriatel.hpbar.Visible = false;
@@ -737,17 +818,25 @@ namespace WarriorsOfTheBlackFieldForest
             hrdina.hpbar.Visible = false;
             hrdina.ukaz_hp.Visible = false;
             hrdina.telo.BringToFront();
-            napis_nad_levelom.BringToFront();
-            napis_nad_levelom.Image = Properties.Resources.vyhrys;
-        }
+            napis_nad_menu.BringToFront();
+            napis_nad_menu.Image = Properties.Resources.vyhrys;
+        }*/
 
         private void koniec_hry()
         {
-            napis_nad_levelom.Visible = true;
-            napis_nad_levelom.Image = Properties.Resources.smrt;
+            textBox_zadaj_meno.Visible = true;
+            textBox_zadaj_meno.BringToFront();
+            tlacitko_submit.BringToFront();
+            tlacitko_submit.Visible = true;
+            tlacitko_hlavne_menu.Visible = true;
+            tlacitko_hlavne_menu.BringToFront();
+            pom = hrdina.level;
+
+            napis_nad_menu.Visible = true;
+            napis_nad_menu.Image = Properties.Resources.smrt;
             tlacitko_new_game.Visible = true;
-            napis_nad_levelom.Parent = pozadie;
-            napis_nad_levelom.BackColor = Color.Transparent;
+            napis_nad_menu.Parent = pozadie;
+            napis_nad_menu.BackColor = Color.Transparent;
             hrdina.zmizni_akcie();
             hrdina.vytvor_zakladneho_hrdinu();
             hrdina.level = 1;
@@ -755,13 +844,14 @@ namespace WarriorsOfTheBlackFieldForest
             padouch.vygeneruj_telo();
             hrdina.pocet_elixirov = 0;
             tlacitko_new_game.BringToFront();
+            level_label.Visible = false;
 
         }
 
         private void aktualizuj_levelup(int obtiaznost)
         {
             levelup.aktualizuj_veci();
-            levelup.xp_teraz = hrdina.xp[obtiaznost - 1];
+            levelup.xp_teraz = hrdina.xp[hrdina.xp.Length % (obtiaznost - 1)];
             levelup.zvysne_xp.Text = levelup.xp_teraz.ToString();
             levelup.aktualizuj_veci();
         }
@@ -893,8 +983,81 @@ namespace WarriorsOfTheBlackFieldForest
         private void x_credits_click(object sender, EventArgs e)
         {
             titulky.Visible = false;
-            tlacitko_kredity.Visible = true;
+            menu.kredity.Visible = true;
+            menu.kredity.BringToFront();
             x_credits.Visible = false;
+        }
+
+        private void x_skore_Click(object sender, EventArgs e)
+        {
+            panel_skore.Visible = false;
+            x_skore.Visible = false;
+        }
+
+        private void tlacitko_submit_Click(object sender, EventArgs e)
+        {
+            zaznamenaj_hraca();
+            panel_skore.Visible = true;
+            panel_skore.BringToFront();
+            x_skore.BringToFront();
+            x_skore.Visible = true;
+            textBox_zadaj_meno.Visible = false;
+            tlacitko_submit.Visible = false;
+
+        }
+
+        public void zaznamenaj_hraca()
+        {
+            rebricek.Add(new Hrac(textBox_zadaj_meno.Text, pom));
+            utried_hracov();
+            
+            if(rebricek.Count > 5) rebricek.RemoveAt(rebricek.Count - 1);
+
+            skore_meno.Text = "";
+            skore_hodnota.Text = "";
+
+            for(int i = 0; i < rebricek.Count; i++)
+            {
+                skore_meno.Text += rebricek[i].meno + "\n";
+                skore_hodnota.Text += rebricek[i].body + "\n";
+            }
+            skore_meno.BringToFront();
+            skore_hodnota.BringToFront();
+
+        }
+
+        public void utried_hracov()
+        {
+            for (int j = 0; j <= rebricek.Count - 2; j++)
+            {
+                for (int i = 0; i <= rebricek.Count - 2; i++)
+                {
+                    if (rebricek[i].body < rebricek[i + 1].body)
+                    {
+                        Hrac pom = rebricek[i + 1];
+                        rebricek[i + 1] = rebricek[i];
+                        rebricek[i] = pom;
+                    }
+                }
+            }
+        }
+
+        private void tlacitko_hlavne_menu_Click(object sender, EventArgs e)
+        {
+            panel_skore.Visible = false;
+            tlacitko_submit.Visible = false;
+            textBox_zadaj_meno.Visible = false;
+
+            menu.ukaz_menu();
+            menu.nazov.Image = Properties.Resources.image;
+            menu.pozadicko.Image = Properties.Resources.gif1;
+            hrdina.hpbar.Visible = false;
+            hrdina.ukaz_hp.Visible = false;
+            padouch.ukaz_hp.Visible = false;
+            padouch.hpbar.Visible = false;
+
+            hrdina.telo.Location = new Point(140,330); 
+            padouch.telo.Location = new Point(490, 330); 
         }
     }
 }

@@ -124,7 +124,9 @@ namespace WarriorsOfTheBlackFieldForest
         {
             telo.Visible = true;
             ukaz_hp.Visible = true;
+            ukaz_hp.BringToFront();
             hpbar.Visible = true;
+            hpbar.BringToFront();
         }
     }
 }

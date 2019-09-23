@@ -67,6 +67,7 @@ namespace WarriorsOfTheBlackFieldForest
             text_levelup.Visible = true;
             text_levelup.BringToFront();
             hrdina.zmizni_akcie();
+            
         }
 
         public void zmizni()
@@ -80,6 +81,7 @@ namespace WarriorsOfTheBlackFieldForest
             atribut2.Visible = false;
             atribut3.Visible = false;
             atribut4.Visible = false;
+            text_levelup.SendToBack();
         }
 
         public void aktualizuj_veci()
