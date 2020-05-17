@@ -1,5 +1,5 @@
 # WarriorsOfTheBlackField
-###### zápočtový program, zimný semester, šk. rok 2018/2019
+###### zápočtový program, zimný semester 2018/2019
 <br/>
  
 Cieľom hry je poraziť čo najviac nepriateľov, ktorých sila a diabolskosť každým levelom rastie.  
