@@ -14,11 +14,11 @@ Tieto staty si môže hrdina navyšovať po prejdení levelu použitím získan�
 
 ## Ťah hrdinu
 Ťah hrdinu spočíva vo zvolení si jednej zo štyroch možných akcií:
- - akcia Krok dopredu - priblíži hrdinu k nepriateľovi. Akcia je dostupná, ak je hrdina od nepriateľa ďalej ako na krok
- - akcia Krok dozadu - posunie hrdinu ďalej od nepriateľa
- - akcia Potion - ak má hrdina k dispozícii aspoň 1 potion, jeho vypitím získa +5 hp. Na začiatku je počet potionov 0.
+ - akcia **Krok dopredu** - priblíži hrdinu k nepriateľovi. Akcia je dostupná, ak je hrdina od nepriateľa ďalej ako na krok
+ - akcia **Krok dozadu** - posunie hrdinu ďalej od nepriateľa
+ - akcia **Potion** - ak má hrdina k dispozícii aspoň 1 potion, jeho vypitím získa +5 hp. Na začiatku je počet potionov 0.
                   Potion je možné získať po porazení nepriateľa použitím získaných xp (viď nižšie)
- - akcia Útok - Ak je hrdina bližšie ako na krok od nepriateľa, zaútočí naňho. Ujma na živote je vypočítaná vzorcom 
+ - akcia **Útok** - Ak je hrdina bližšie ako na krok od nepriateľa, zaútočí naňho. Ujma na živote je vypočítaná vzorcom 
  
                 nepriatel.akt_sila_utoku = utok + a * rand.Next(0, utok / 2) - (rand.Next(0, 51) / 40) * obrana;      
                 
